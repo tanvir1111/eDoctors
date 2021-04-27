@@ -1,21 +1,18 @@
-package com.incubation_lab.edoctors;
+package com.incubation_lab.edoctors.Splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.Placeholder;
-import androidx.transition.TransitionManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.incubation_lab.edoctors.R;
+import com.incubation_lab.edoctors.Splash.ui.ViewPagerAdapter;
 
 public class SplashActivity extends AppCompatActivity {
 

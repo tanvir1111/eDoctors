@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:id="@+id/parent_container"
-    tools:context=".UserLoginFragment">
+    tools:context=".Splash.ui.SplashToUserLoginFragment">
 
     <androidx.constraintlayout.widget.Placeholder
         android:id="@+id/user_login_placeholder"

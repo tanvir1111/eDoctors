@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <EditText
+        android:id="@+id/phone_no"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Phone no."
+        android:maxWidth="400dp"
+        android:paddingHorizontal="8dp"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20999998"
+        app:layout_constraintWidth_percent=".75" />
+
+    <EditText
+        android:id="@+id/otp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Enter OTP"
+        android:inputType="textPassword"
+        android:enabled="false"
+
+        android:maxWidth="400dp"
+        android:paddingHorizontal="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/get_otp"
+        app:layout_constraintWidth_percent=".75" />
+
+    <TextView
+        android:id="@+id/get_otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Get OTP"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        style="@style/CustomTabNotSelected"
+        android:backgroundTint="@color/red_primary"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+
+        app:layout_constraintEnd_toEndOf="@+id/phone_no"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/phone_no"
+        app:layout_constraintTop_toBottomOf="@+id/phone_no" />
+
+    <Button
+        android:id="@+id/continue_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/border_radius"
+        android:enabled="false"
+        android:maxWidth="200dp"
+
+        android:text="Continue"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otp"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintWidth_percent=".4" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
