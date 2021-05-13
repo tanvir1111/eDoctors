@@ -10,16 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EDoctors">
         <activity
-            android:name=".Login.LoginActivity"
-            android:label="@string/title_activity_login">
-
-        </activity>
-        <activity android:name=".Splash.SplashActivity">
+            android:name=".MainActivity.MainActivity"
+            android:label="@string/title_activity_dashboard"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".Login.LoginActivity"
+            android:label="@string/title_activity_login">
+
+        </activity>
+        <activity android:name=".Splash.SplashActivity">
+
         </activity>
     </application>
 
