@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity.ui.notifications.NotificationsFragment">
     <include
-        android:id="@+id/appBar"
+        android:id="@+id/include"
         layout="@layout/appbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

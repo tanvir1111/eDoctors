@@ -11,89 +11,95 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:drawablePadding="8dp"
         android:hint="First Name"
+
         android:maxWidth="400dp"
 
-
         android:paddingHorizontal="8dp"
-
+        app:drawableStartCompat="@drawable/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".75" />
 
-        <EditText
-            android:id="@+id/last_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="Last Name"
-            android:inputType="textPassword"
-            android:maxWidth="400dp"
-
-            android:paddingHorizontal="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/first_name"
-            app:layout_constraintWidth_percent=".75" />
-
     <EditText
+        android:id="@+id/last_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="Last Name"
+        app:drawableStartCompat="@drawable/name"
+        android:drawablePadding="8dp"
+        android:maxWidth="400dp"
+
+        android:paddingHorizontal="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/first_name"
+        app:layout_constraintWidth_percent=".75" />
+
+    <TextView
         android:id="@+id/date_of_birth"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:hint="Date Of Birth"
-        android:maxWidth="400dp"
-
-
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
         android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:text="Date Of Birth"
+        android:textColor="@color/black"
+        app:drawableStartCompat="@drawable/calender"
+        app:layout_constraintEnd_toStartOf="@+id/gender"
 
+        app:layout_constraintStart_toStartOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
+
+    <Spinner
+        android:id="@+id/gender"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:entries="@array/gender"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/email"
+        app:layout_constraintStart_toEndOf="@+id/date_of_birth"
+        app:layout_constraintTop_toTopOf="@+id/date_of_birth" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:inputType="textEmailAddress"
+        app:drawableStartCompat="@drawable/email"
+        android:drawablePadding="8dp"
+
+
+        android:hint="example@gmail.com"
+        android:maxWidth="400dp"
+        android:paddingHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last_name"
         app:layout_constraintWidth_percent=".75" />
 
     <EditText
-        android:id="@+id/gender"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Gender"
-        android:inputType="textPassword"
-
-        android:maxWidth="400dp"
-        android:paddingHorizontal="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_of_birth"
-        app:layout_constraintWidth_percent=".75" />
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Gender"
-        android:inputType="textPassword"
-
-        android:maxWidth="400dp"
-        android:paddingHorizontal="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gender"
-        app:layout_constraintWidth_percent=".75" />
-    <EditText
         android:id="@+id/password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:hint="password"
+        app:drawableStartCompat="@drawable/password"
+        android:drawablePadding="8dp"
         android:inputType="textPassword"
-
         android:maxWidth="400dp"
         android:paddingHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
+        app:layout_constraintTop_toBottomOf="@+id/gender"
         app:layout_constraintWidth_percent=".75" />
     <EditText
         android:id="@+id/retype_password"
@@ -102,7 +108,8 @@
         android:layout_marginTop="8dp"
         android:hint="Re Type password"
         android:inputType="textPassword"
-
+        app:drawableStartCompat="@drawable/password"
+        android:drawablePadding="8dp"
         android:maxWidth="400dp"
         android:paddingHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -130,9 +137,5 @@
         app:layout_constraintWidth_percent=".4" />
 
 
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

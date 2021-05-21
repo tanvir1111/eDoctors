@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.navigation.ui.NavigationUI;
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,6 +18,8 @@ import com.incubation_lab.edoctors.Login.ui.LoginFragment;
 import com.incubation_lab.edoctors.Login.ui.MobileVerificationFragment;
 import com.incubation_lab.edoctors.Login.ui.RegisterFragment;
 import com.incubation_lab.edoctors.R;
+
+import static com.incubation_lab.edoctors.StaticData.LoginCurrentFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -30,8 +34,27 @@ public class LoginActivity extends AppCompatActivity {
         register = findViewById(R.id.register_tab);
         frameLayout = findViewById(R.id.login_frame);
 
+
         setFragment(new LoginFragment());
 
+        LoginCurrentFragment.observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer==1){
+                    login.setTextAppearance(R.style.CustomTabSelected);
+                    register.setTextAppearance(R.style.CustomTabNotSelected);
+                    login.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.white)));
+                    register.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.red_primary)));
+
+                }
+                else {
+                    register.setTextAppearance(R.style.CustomTabSelected);
+                    login.setTextAppearance(R.style.CustomTabNotSelected);
+                    register.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.white)));
+                    login.setBackgroundTintList(ColorStateList.valueOf(getColor(R.color.red_primary)));
+                }
+            }
+        });
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +94,12 @@ public class LoginActivity extends AppCompatActivity {
     public void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.login_frame,fragment);
+        if(fragment instanceof RegisterFragment){
+            LoginCurrentFragment.setValue(2);
+        }
+        else if(fragment instanceof LoginFragment){
+            LoginCurrentFragment.setValue(1);
+        }
 
 
 

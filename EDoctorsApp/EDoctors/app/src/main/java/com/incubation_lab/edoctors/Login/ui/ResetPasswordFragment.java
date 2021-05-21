@@ -29,20 +29,22 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.incubation_lab.edoctors.Login.LoginActivity;
 import com.incubation_lab.edoctors.MainActivity.MainActivity;
+import com.incubation_lab.edoctors.Models.UserDataModel;
 import com.incubation_lab.edoctors.R;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.incubation_lab.edoctors.StaticData.STATUS_PASSWORD_UPDATED;
 import static com.incubation_lab.edoctors.StaticData.USER_EXISTS;
 import static com.incubation_lab.edoctors.StaticData.USER_NOT_FOUND;
 
 
-public class MobileVerificationFragment extends Fragment implements View.OnClickListener {
-    private TextView getOptBtn;
+public class ResetPasswordFragment extends Fragment implements View.OnClickListener {
+    private TextView getOptBtn,verifyBtn;
     private Button continueBtn;
-    private EditText phoneEditText,otpEditText;
+    private EditText phoneEditText,otpEditText,newPassEdittext,reTypePassEditText;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     String verificationID;
@@ -51,7 +53,7 @@ public class MobileVerificationFragment extends Fragment implements View.OnClick
     LoginViewModel loginViewModel;
 
 
-    public MobileVerificationFragment() {
+    public ResetPasswordFragment() {
 
     }
 
@@ -68,17 +70,21 @@ public class MobileVerificationFragment extends Fragment implements View.OnClick
 
 
 
-        View root =  inflater.inflate(R.layout.fragment_mobile_verification, container, false);
+        View root =  inflater.inflate(R.layout.fragment_reset_password, container, false);
         getOptBtn = root.findViewById(R.id.get_otp);
         continueBtn = root.findViewById(R.id.continue_btn);
         phoneEditText = root.findViewById(R.id.phone_no);
         otpEditText = root.findViewById(R.id.otp);
+        newPassEdittext = root.findViewById(R.id.new_pass);
+        verifyBtn = root.findViewById(R.id.verify);
+        reTypePassEditText = root.findViewById(R.id.retype_password);
         progressBar = root.findViewById(R.id.progress_bar);
         mAuth=FirebaseAuth.getInstance();
         loginViewModel=new ViewModelProvider(this).get(LoginViewModel.class);
 
         getOptBtn.setOnClickListener(this);
         continueBtn.setOnClickListener(this);
+        verifyBtn.setOnClickListener(this);
 
         phoneEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,42 +118,70 @@ public class MobileVerificationFragment extends Fragment implements View.OnClick
                 progressBar.setVisibility(View.VISIBLE);
 
                 break;
-            case R.id.continue_btn:
+            case R.id.verify:
                 String code= otpEditText.getText().toString();
+                progressBar.setVisibility(View.VISIBLE);
                 PhoneAuthCredential credential =PhoneAuthProvider.getCredential(verificationID,code);
                 signIn(credential);
+                break;
+            case R.id.continue_btn:
                 progressBar.setVisibility(View.VISIBLE);
 
+                resetPass();
+
                 break;
+        }
+    }
+
+    private void resetPass() {
+        String newpass= newPassEdittext.getText().toString();
+        String reTypePass= reTypePassEditText.getText().toString();
+
+        if(newpass.equals(reTypePass)){
+            loginViewModel.updatePass(new UserDataModel(phoneNumber,newpass));
+            loginViewModel.getLoginStatus().observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    if(s.equals(STATUS_PASSWORD_UPDATED)){
+                        LoginFragment loginFragment = new LoginFragment();
+
+                        ((LoginActivity) getActivity()).setFragment(loginFragment);
+                    }
+                }
+            });
+
+        }
+        else {
+            reTypePassEditText.setError("passwords does not match");
+            progressBar.setVisibility(View.GONE);
         }
     }
 
     private void sendOtp(String number) {
 
 
-            phoneNumber="+88"+number;
-            loginViewModel.findPhone(phoneNumber);
+        phoneNumber="+88"+number;
+        loginViewModel.findPhone(phoneNumber);
 
-            loginViewModel.getLoginStatus().observe(this, new Observer<String>() {
-                @Override
-                public void onChanged(String s) {
-                    if(s.equals(USER_EXISTS)){
-                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
+        loginViewModel.getLoginStatus().observe(this,s ->  {
 
-                    }
-                    else if(s.equals(USER_NOT_FOUND)){
-                        continueBtn.setEnabled(true);
-                        otpEditText.setEnabled(true);
-                        PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-                                .setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS)
-                                .setActivity(getActivity()).setCallbacks(mCallBacks)
-                                .build();
+                if(s.equals(USER_NOT_FOUND)){
+                    Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
 
-                        PhoneAuthProvider.verifyPhoneNumber(options);
-                    }
                 }
-            });
+                else if(s.equals(USER_EXISTS)){
+                    continueBtn.setEnabled(true);
+                    otpEditText.setEnabled(true);
+                    PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
+                            .setPhoneNumber(phoneNumber).setTimeout(60L, TimeUnit.SECONDS)
+                            .setActivity(getActivity()).setCallbacks(mCallBacks)
+                            .build();
+
+                    PhoneAuthProvider.verifyPhoneNumber(options);
+                }
+
+        });
 
 
 
@@ -179,6 +213,8 @@ public class MobileVerificationFragment extends Fragment implements View.OnClick
             super.onCodeSent(s, forceResendingToken);
             verificationID=s;
             progressBar.setVisibility(View.GONE);
+            phoneEditText.setEnabled(false);
+            verifyBtn.setEnabled(true);
 
 
         }
@@ -189,14 +225,15 @@ public class MobileVerificationFragment extends Fragment implements View.OnClick
             public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if(task.isSuccessful()){
+                    verifyBtn.setEnabled(false);
+                    getOptBtn.setEnabled(false);
+                    phoneEditText.setEnabled(false);
+                    otpEditText.setEnabled(false);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("number", phoneNumber);
+                    newPassEdittext.setEnabled(true);
+                    reTypePassEditText.setEnabled(true);
 
-// Set Fragmentclass Arguments
-                    RegisterFragment registerFragment = new RegisterFragment();
-                    registerFragment.setArguments(bundle);
-                    ((LoginActivity) getActivity()).setFragment(registerFragment);
+                    continueBtn.setEnabled(true);
 
                 }
                 else {
