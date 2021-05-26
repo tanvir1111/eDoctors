@@ -39,20 +39,20 @@ import static com.incubation_lab.edoctors.StaticData.STATUS_REGISTERED;
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
 
-    TextView dateOfBirth;
-    Button signUpBtn;
+    private TextView dateOfBirth;
+    private Button signUpBtn;
 
-    EditText firstName;
-    EditText lastName;
-    Spinner gender;
-    EditText password;
-    EditText re_password;
-    EditText email;
+    private EditText firstName;
+    private EditText lastName;
+    private Spinner gender;
+    private EditText password;
+    private EditText re_password;
+    private EditText email;
 
 
-    String phone;
+    private String phone;
 
-    LoginViewModel loginViewModel;
+    private LoginViewModel loginViewModel;
 
 
     public RegisterFragment() {

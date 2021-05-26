@@ -28,10 +28,10 @@ import static com.incubation_lab.edoctors.StaticData.STATUS_LOGGED_IN;
 public class LoginFragment extends Fragment {
 
 
-    EditText phoneEditText,passwordEditText;
-    TextView forgotPass,register;
-    Button signInButton;
-    LoginViewModel loginViewModel;
+    private EditText phoneEditText,passwordEditText;
+    private TextView forgotPass,register;
+    private Button signInButton;
+    private LoginViewModel loginViewModel;
     public LoginFragment() {
         // Required empty public constructor
     }

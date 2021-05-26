@@ -13,7 +13,7 @@ import com.incubation_lab.edoctors.R;
 import org.jetbrains.annotations.NotNull;
 
 public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsViewHolder> {
-    Context context;
+    private Context context;
     public DoctorsAdapter(Context context) {
         this.context = context;
     }

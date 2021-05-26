@@ -45,8 +45,8 @@ public class MobileVerificationFragment extends Fragment implements View.OnClick
     private EditText phoneEditText,otpEditText;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
-    String verificationID;
-    String phoneNumber;
+    private String verificationID;
+    private String phoneNumber;
 
     LoginViewModel loginViewModel;
 

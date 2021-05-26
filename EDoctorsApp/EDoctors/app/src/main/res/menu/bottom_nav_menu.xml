@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/navigation_health_blogs"
-        android:icon="@drawable/icon_heart"
+        android:icon="@drawable/icon_heartbit"
         android:title="@string/title_health_blogs"
         android:menuCategory="container"
         />

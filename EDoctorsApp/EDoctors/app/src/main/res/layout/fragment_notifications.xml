@@ -7,7 +7,7 @@
 
     tools:context=".MainActivity.ui.notifications.NotificationsFragment">
     <include
-        android:id="@+id/include"
+        android:id="@+id/appbarIncluded"
         layout="@layout/appbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

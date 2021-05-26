@@ -28,7 +28,7 @@ public class UserRepository {
     private MutableLiveData<String> loginStatus;
     private MutableLiveData<UserDataModel> loggedInUser;
     private RetroInterface retroInterface;
-    Application application;
+    private Application application;
 
 
     public UserRepository(Application application) {

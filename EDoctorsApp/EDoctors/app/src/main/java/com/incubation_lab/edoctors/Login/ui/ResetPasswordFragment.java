@@ -47,10 +47,10 @@ public class ResetPasswordFragment extends Fragment implements View.OnClickListe
     private EditText phoneEditText,otpEditText,newPassEdittext,reTypePassEditText;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
-    String verificationID;
-    String phoneNumber;
+    private String verificationID;
+    private String phoneNumber;
 
-    LoginViewModel loginViewModel;
+    private LoginViewModel loginViewModel;
 
 
     public ResetPasswordFragment() {

@@ -27,12 +27,12 @@ import static com.incubation_lab.edoctors.Repository.UserRepository.LOGIN_SHARED
 
 public class SplashActivity extends AppCompatActivity {
 
-    ImageView logo;
-    LinearProgressIndicator indicator;
-    ViewPager2 splashViewPager;
-    ConstraintLayout container;
-    LoginViewModel loginViewModel;
-    ObjectAnimator progressAnimator;
+    private ImageView logo;
+    private LinearProgressIndicator indicator;
+    private  ViewPager2 splashViewPager;
+    private ConstraintLayout container;
+    private  LoginViewModel loginViewModel;
+    private  ObjectAnimator progressAnimator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

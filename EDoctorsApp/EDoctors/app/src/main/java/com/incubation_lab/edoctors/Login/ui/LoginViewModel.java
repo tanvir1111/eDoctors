@@ -14,8 +14,8 @@ import com.incubation_lab.edoctors.Repository.UserRepository;
 import org.jetbrains.annotations.NotNull;
 
 public class LoginViewModel extends AndroidViewModel {
-    RetroInterface retroInterface;
-    UserRepository repository;
+    private RetroInterface retroInterface;
+    private UserRepository repository;
     
 
     public LoginViewModel(@NonNull @NotNull Application application) {

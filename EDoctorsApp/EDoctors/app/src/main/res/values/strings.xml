@@ -10,6 +10,16 @@
     <string name="title_health_blogs">Health Blogs</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_doctors">Doctors</string>
+    <string name="corona_specialist">Corona Specialist</string>
+    <string name="neurologist">Neurologist</string>
+    <string name="liver">Liver</string>
+    <string name="dentist">Dentist</string>
+    <string name="eye">EYE</string>
+    <string name="cardiologist">cardiologist</string>
+    <string name="gastroenterologist">Gastroenterologist</string>
+    <string name="physician">Physician</string>
+    <string name="others">Others</string>
+    <string name="respiratory">Respiratory</string>
 
     <string-array name="categories">
 

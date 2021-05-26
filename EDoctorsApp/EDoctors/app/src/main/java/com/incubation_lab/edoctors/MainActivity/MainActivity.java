@@ -22,8 +22,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView drawerBtn;
-    DrawerLayout mDrawerLayout;
+    private ImageView drawerBtn;
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
