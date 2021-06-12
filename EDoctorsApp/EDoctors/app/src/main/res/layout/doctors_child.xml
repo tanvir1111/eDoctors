@@ -16,43 +16,46 @@
         android:padding="8dp"
         >
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/doctor_image_card"
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/doctor_image"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:elevation="4dp"
+            android:src="@drawable/icon_doctor"
+            app:civ_border_color="@color/red_primary"
+            app:civ_border_width="1dp"
 
-            app:cardCornerRadius="30dp"
-            app:layout_constraintBottom_toBottomOf="@+id/doctor_hospital"
+
+            app:layout_constraintBottom_toBottomOf="@+id/doctor_designation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/doctor_name">
-
-            <ImageView
-                android:id="@+id/doctor_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="5dp"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_doctor"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toTopOf="@+id/doctor_name" />
 
 
         <TextView
             android:id="@+id/doctor_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Md.Tanvir Ahmmad"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/red_primary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/doctor_image_card"
+            app:layout_constraintEnd_toStartOf="@+id/doctors_ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/doctor_image"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/doctor_speciality"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="Medical Officer"
+            app:layout_constraintEnd_toStartOf="@+id/doctors_ratingBar"
+            app:layout_constraintStart_toStartOf="@+id/doctor_name"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_name" />
 
         <TextView
             android:id="@+id/doctor_designation"
@@ -60,26 +63,41 @@
             android:layout_height="wrap_content"
 
             android:layout_marginTop="4dp"
-            android:text="Medical Officer"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="MBBS,FCPS (Dhaka Medical College)"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/doctors_ratingBar"
+            app:layout_constraintStart_toStartOf="@+id/doctor_speciality"
+            app:layout_constraintTop_toBottomOf="@+id/doctor_speciality" />
+
+
+        <RatingBar
+            android:id="@+id/doctors_ratingBar"
+            style="?attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:isIndicator="true"
+            android:stepSize=".01"
+            android:numStars="5"
+            android:rating="3.5"
+
+            app:layout_constraintBottom_toBottomOf="@+id/doctor_designation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/doctor_name"
-            app:layout_constraintTop_toBottomOf="@+id/doctor_name" />
+            app:layout_constraintTop_toBottomOf="@+id/doctor_fee" />
 
         <TextView
-            android:id="@+id/doctor_hospital"
-            android:layout_width="0dp"
+            android:id="@+id/doctor_fee"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
-            android:text="MBBS (Dhaka Medicalo College)"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/doctor_designation"
-            app:layout_constraintTop_toBottomOf="@+id/doctor_designation" />
-
+            android:layout_marginEnd="8dp"
+            android:text="500 BDT"
+            app:layout_constraintBottom_toTopOf="@+id/doctors_ratingBar"
+            app:layout_constraintEnd_toEndOf="@+id/doctors_ratingBar"
+            app:layout_constraintStart_toStartOf="@+id/doctors_ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/doctor_name" />
 
 
 

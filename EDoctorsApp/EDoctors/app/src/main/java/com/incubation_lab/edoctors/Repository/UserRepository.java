@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.incubation_lab.edoctors.Models.UserDataModel;
+import com.incubation_lab.edoctors.Models.UserImageModel;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInstance;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInterface;
 
@@ -18,6 +19,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.incubation_lab.edoctors.StaticData.PICTURE_UPDATE_SUCCESS;
 import static com.incubation_lab.edoctors.StaticData.RESPONSE_SUCCESS;
 import static com.incubation_lab.edoctors.StaticData.STATUS_LOGGED_IN;
 import static com.incubation_lab.edoctors.StaticData.STATUS_REGISTERED;
@@ -26,7 +28,7 @@ public class UserRepository {
     public static String LOGIN_SHARED_PREFS="user_token";
     public static String ACCESS_TOKEN="access_token";
     private MutableLiveData<String> loginStatus;
-    private MutableLiveData<UserDataModel> loggedInUser;
+    private static MutableLiveData<UserDataModel> loggedInUser=new MutableLiveData<>();
     private RetroInterface retroInterface;
     private Application application;
 
@@ -34,7 +36,7 @@ public class UserRepository {
     public UserRepository(Application application) {
         retroInterface= RetroInstance.getRetro();
         loginStatus=new MutableLiveData<>();
-        loggedInUser=new MutableLiveData<>();
+
         this.application= application;
 
 
@@ -49,14 +51,13 @@ public class UserRepository {
                     if (response.body().getServerMsg().equals(RESPONSE_SUCCESS)){
                         Toast.makeText(application, "Registration Successful", Toast.LENGTH_SHORT).show();
                         loginStatus.setValue(STATUS_REGISTERED);
-                        loginStatus.setValue("");
                     }
                     else{
                         Toast.makeText(application, response.body().getServerMsg(), Toast.LENGTH_SHORT).show();
                         loginStatus.setValue(response.body().getServerMsg());
 
-                        loginStatus.setValue("");
                     }
+                    loginStatus.setValue("");
                 }
             }
 
@@ -78,11 +79,13 @@ public class UserRepository {
             public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
                 if(response.isSuccessful()){
                     if (response.body().getServerMsg().equals(RESPONSE_SUCCESS)){
-                        loginStatus.setValue(STATUS_LOGGED_IN);
-                        loginStatus.setValue("");
+
                         loginPrefsEditor.putString(ACCESS_TOKEN,response.body().getToken());
                         loginPrefsEditor.apply();
                         loggedInUser.setValue(response.body());
+                        Toast.makeText(application, response.body().getFirstName(), Toast.LENGTH_SHORT).show();
+                        loginStatus.setValue(STATUS_LOGGED_IN);
+                        loginStatus.setValue("");
                     }
                     else{
                         Toast.makeText(application, response.body().getServerMsg(), Toast.LENGTH_SHORT).show();
@@ -178,5 +181,29 @@ public class UserRepository {
                 Toast.makeText(application, "Network Error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void updatePicture(UserImageModel encodedImage) {
+        Call<UserImageModel> call = retroInterface.updatePicture(encodedImage);
+        call.enqueue(new Callback<UserImageModel>() {
+            @Override
+            public void onResponse(Call<UserImageModel> call, Response<UserImageModel> response) {
+                if (response.isSuccessful()) {
+                    if(response.body().getServerMsg().equals(PICTURE_UPDATE_SUCCESS)){
+                        loginStatus.setValue(PICTURE_UPDATE_SUCCESS);
+                    }
+                    Toast.makeText(application, response.body().getServerMsg(), Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserImageModel> call, Throwable t) {
+                Toast.makeText(application, "failed to update! try again later", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }

@@ -1,7 +1,6 @@
 package com.incubation_lab.edoctors.Login.ui;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +18,7 @@ import com.incubation_lab.edoctors.MainActivity.MainActivity;
 import com.incubation_lab.edoctors.Models.UserDataModel;
 import com.incubation_lab.edoctors.R;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.incubation_lab.edoctors.StaticData.BUNDLE_KEY;
-import static com.incubation_lab.edoctors.StaticData.KEY_FORGOT_PASS;
 import static com.incubation_lab.edoctors.StaticData.KEY_REGISTER;
 import static com.incubation_lab.edoctors.StaticData.STATUS_LOGGED_IN;
 
@@ -59,7 +56,10 @@ public class LoginFragment extends Fragment {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loginViewModel.login(new UserDataModel("+88"+phoneEditText.getText().toString(),passwordEditText.getText().toString()));
+               if(!checkIfEmpty(phoneEditText)&&!checkIfEmpty(passwordEditText)){
+                   loginViewModel.login(new UserDataModel("+88"+phoneEditText.getText().toString(),passwordEditText.getText().toString()));
+               }
+
 
 
             }
@@ -69,9 +69,9 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString(BUNDLE_KEY, KEY_REGISTER);
-                RegisterFragment registerFragment=new RegisterFragment();
-                registerFragment.setArguments(bundle);
-                ((LoginActivity) getActivity()).setFragment(registerFragment);
+                MobileVerificationFragment mobileVerificationFragment=new MobileVerificationFragment();
+                mobileVerificationFragment.setArguments(bundle);
+                ((LoginActivity) getActivity()).setFragment(mobileVerificationFragment);
             }
         });
         loginViewModel.getLoginStatus().observe(getViewLifecycleOwner(), new Observer<String>() {
@@ -99,5 +99,14 @@ public class LoginFragment extends Fragment {
         });
 
         return root;
+    }
+    private Boolean checkIfEmpty(EditText v) {
+        if(v.getText().toString().isEmpty())
+        {
+            v.setError("Field Required");
+            v.requestFocus();
+            return true;
+        }
+        return false;
     }
 }

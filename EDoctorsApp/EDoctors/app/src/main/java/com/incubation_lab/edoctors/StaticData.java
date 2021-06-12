@@ -13,6 +13,8 @@ public class StaticData {
     public static final String STATUS_REGISTERED="registered";
     public static final String USER_NOT_FOUND="user not found";
     public static final String RESPONSE_SUCCESS="success";
+    public static final String PICTURE_UPDATE_SUCCESS="picture updated";
+
     public static MutableLiveData<Integer> LoginCurrentFragment=new MutableLiveData<>();
 
 

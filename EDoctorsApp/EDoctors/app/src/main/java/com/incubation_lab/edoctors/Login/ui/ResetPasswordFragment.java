@@ -1,6 +1,5 @@
 package com.incubation_lab.edoctors.Login.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,7 +27,6 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.incubation_lab.edoctors.Login.LoginActivity;
-import com.incubation_lab.edoctors.MainActivity.MainActivity;
 import com.incubation_lab.edoctors.Models.UserDataModel;
 import com.incubation_lab.edoctors.R;
 

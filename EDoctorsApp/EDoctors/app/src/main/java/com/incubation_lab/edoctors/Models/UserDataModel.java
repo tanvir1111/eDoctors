@@ -31,6 +31,10 @@ public class UserDataModel {
     @SerializedName("token")
     @Expose
     private String token;
+    @SerializedName("image_url")
+    @Expose
+    private String imageUrl;
+
 
 
     public UserDataModel(String phone, String password) {
@@ -86,5 +90,9 @@ public class UserDataModel {
 
     public String getToken() {
         return token;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

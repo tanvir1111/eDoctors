@@ -2,13 +2,13 @@ package com.incubation_lab.edoctors.MainActivity.ui.doctors;
 
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.motion.widget.MotionLayout;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +20,6 @@ import android.widget.TextView;
 
 import com.incubation_lab.edoctors.MainActivity.ui.doctors.recycler.DoctorsAdapter;
 import com.incubation_lab.edoctors.R;
-
-import org.jetbrains.annotations.NotNull;
 
 public class DoctorsFragment extends Fragment implements View.OnClickListener{
 
@@ -41,7 +39,7 @@ public class DoctorsFragment extends Fragment implements View.OnClickListener{
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_doctors, container, false);
         doctorRecyclerView = root.findViewById(R.id.doctor_recycler);
-        doctorRecyclerView.setAdapter(new DoctorsAdapter(getContext()));
+
         doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
 
         selectedDept=root.findViewById(R.id.choose_department_Textview);
@@ -69,6 +67,11 @@ public class DoctorsFragment extends Fragment implements View.OnClickListener{
         physioCard.setOnClickListener(this);
         othersCard.setOnClickListener(this);
         respiratoryCard.setOnClickListener(this);
+
+        mViewModel= new ViewModelProvider(this).get(DoctorsViewModel.class);
+        mViewModel.getAllDoctors().observe(getViewLifecycleOwner(),doctorDataModels -> {
+            doctorRecyclerView.setAdapter(new DoctorsAdapter(getContext(),doctorDataModels));
+        });
 
 
 

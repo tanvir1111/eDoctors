@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.incubation_lab.edoctors.Models.UserDataModel;
+import com.incubation_lab.edoctors.Models.UserImageModel;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInstance;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInterface;
 import com.incubation_lab.edoctors.Repository.UserRepository;
@@ -45,5 +46,9 @@ public class LoginViewModel extends AndroidViewModel {
 
     public void updatePass(UserDataModel userDataModel) {
         repository.updatePass(userDataModel);
+    }
+
+    public void updatePicture(UserImageModel encodedImage) {
+        repository.updatePicture(encodedImage);
     }
 }

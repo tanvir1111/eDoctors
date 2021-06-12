@@ -20,18 +20,12 @@ import android.widget.Toast;
 import com.incubation_lab.edoctors.Login.LoginActivity;
 import com.incubation_lab.edoctors.Models.UserDataModel;
 import com.incubation_lab.edoctors.R;
-import com.incubation_lab.edoctors.Repository.Remote.RetroInstance;
-import com.incubation_lab.edoctors.Repository.Remote.RetroInterface;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.incubation_lab.edoctors.StaticData.STATUS_REGISTERED;
 
