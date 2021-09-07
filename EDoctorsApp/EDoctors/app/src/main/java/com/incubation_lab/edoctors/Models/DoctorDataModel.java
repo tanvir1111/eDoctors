@@ -36,6 +36,9 @@ public class DoctorDataModel implements Serializable {
     @SerializedName("image_url")
     @Expose
     private String imageUrl;
+    @SerializedName("rating")
+    @Expose
+    private String rating;
 
     public String getName() {
         return name;
@@ -76,4 +79,8 @@ public class DoctorDataModel implements Serializable {
     public String getImageUrl() {
         return imageUrl;
     }
+    public String getRating() {
+        return rating;
+    }
+
 }

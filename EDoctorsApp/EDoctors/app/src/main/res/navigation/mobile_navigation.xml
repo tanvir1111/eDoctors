@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_navigation_profile"
-            app:destination="@id/navigation_profile" />
+            app:destination="@id/navigation_profile"
+            app:popUpTo="@id/navigation_home" />
     </fragment>
 
     <fragment
@@ -42,6 +43,9 @@
         <action
             android:id="@+id/action_navigation_doctors_to_navigation_profile"
             app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_doctors_to_navigation_doctor_profile"
+            app:destination="@id/navigation_doctor_profile" />
     </fragment>
     <fragment
         android:id="@+id/navigation_med_reminder"
@@ -58,4 +62,9 @@
         android:name="com.incubation_lab.edoctors.MainActivity.ui.ViewProfileFragment"
 
         tools:layout="@layout/fragment_view_profile" />
+    <fragment
+        android:id="@+id/navigation_doctor_profile"
+        android:name="com.incubation_lab.edoctors.MainActivity.ui.doctors.ViewDoctorProfileFragment"
+
+        tools:layout="@layout/fragment_view_doctor_profile" />
 </navigation>

@@ -12,14 +12,14 @@
         android:id="@+id/navigation_health_blogs"
         android:icon="@drawable/icon_heartbit"
         android:title="@string/title_health_blogs"
-        android:menuCategory="container"
+
         />
 
     <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_notifications"
-        android:menuCategory="container"
+
         />
 
     <item
@@ -27,7 +27,6 @@
         android:icon="@drawable/icon_doctor"
         android:title="@string/title_doctors"
 
-        android:menuCategory="container"
         />
 
 </menu>

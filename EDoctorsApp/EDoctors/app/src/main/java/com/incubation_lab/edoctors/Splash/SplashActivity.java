@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.incubation_lab.doctors.VideoActivity;
 import com.incubation_lab.edoctors.Login.LoginActivity;
 import com.incubation_lab.edoctors.Login.ui.LoginViewModel;
 import com.incubation_lab.edoctors.MainActivity.MainActivity;
@@ -37,6 +38,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        startActivity(new Intent(this, VideoActivity.class));
         logo = findViewById(R.id.splash_logo);
         indicator=findViewById(R.id.splash_progress_indicator);
         splashViewPager = findViewById(R.id.splash_viewpager);

@@ -20,6 +20,7 @@
     <string name="physician">Physician</string>
     <string name="others">Others</string>
     <string name="respiratory">Respiratory</string>
+    <string name="reviews">Reviews</string>
 
     <string-array name="categories">
 

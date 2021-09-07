@@ -90,20 +90,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void setFragment(Fragment fragment){
-        FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.login_frame,fragment);
-        if(fragment instanceof RegisterFragment){
-            LoginCurrentFragment.setValue(2);
-        }
-        else if(fragment instanceof LoginFragment){
-            LoginCurrentFragment.setValue(1);
-        }
-
-
-
-        fragmentTransaction.commit();
-    }
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (getCurrentFocus() != null) {
@@ -127,4 +113,19 @@ public class LoginActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+    public void setFragment(Fragment fragment){
+        FragmentTransaction fragmentTransaction= getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.login_frame,fragment);
+        if(fragment instanceof RegisterFragment){
+            LoginCurrentFragment.setValue(2);
+        }
+        else if(fragment instanceof LoginFragment){
+            LoginCurrentFragment.setValue(1);
+        }
+
+
+
+        fragmentTransaction.commit();
+    }
+
 }

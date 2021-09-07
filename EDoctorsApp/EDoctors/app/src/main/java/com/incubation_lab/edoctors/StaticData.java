@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 
 public class StaticData {
     public static final String BUNDLE_KEY="key";
+    public static final String DOCTOR_BUNDLE_KEY = "selected_doctor";
     public static final String KEY_FORGOT_PASS="forgotPass";
     public static final String KEY_REGISTER="register";
     public static final String USER_EXISTS="user already exists";
