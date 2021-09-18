@@ -3,7 +3,9 @@ package com.incubation_lab.edoctors.Models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserDataModel {
+import java.io.Serializable;
+
+public class UserDataModel implements Serializable {
     @SerializedName("first_name")
     @Expose
     private String firstName;

@@ -7,7 +7,10 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
+
+import com.incubation_lab.edoctors.Models.AppointmentDataModel;
 import com.incubation_lab.edoctors.Models.DoctorDataModel;
 import com.incubation_lab.edoctors.Models.UserDataModel;
 import com.incubation_lab.edoctors.Models.UserImageModel;
@@ -23,7 +26,7 @@ public interface RetroInterface {
     Call<UserDataModel> login(@Body UserDataModel userDataModel);
     @POST("/api/user/validateToken")
     Call<UserDataModel> validateToken(@Body UserDataModel token);
-    @POST("/api/user/findPhone")
+    @POST("/api/user/findByPhone")
     Call<UserDataModel> findByPhone(@Body UserDataModel phone);
     @PATCH("/api/user/updatePassword")
     Call<UserDataModel> updatePassword(@Body UserDataModel userDataModel);
@@ -33,5 +36,24 @@ public interface RetroInterface {
 
     @GET("/api/doctor/getAllDoctors")
     Call<ArrayList<DoctorDataModel>> getAllDoctors();
+
+
+    @POST("/api/appointment/getAppointment")
+    Call<AppointmentDataModel> getAppointment(@Body AppointmentDataModel appointmentDataModel);
+
+
+    @POST("/api/appointment/getPatientAppointmentList/{patient_id}")
+    Call<ArrayList<AppointmentDataModel>> getPatientAppointmentList(  @Path("patient_id") String patientId);
+
+
+
+//    Doctors
+    @POST("/api/doctor/login")
+    Call<DoctorDataModel> loginDoctor(@Body DoctorDataModel doctorData);
+
+
+    @POST("/api/appointment/getDoctorAppointmentList/{doctor_id}")
+    Call<ArrayList<AppointmentDataModel>> getDoctorAppointmentList(  @Path("doctor_id") String doctorId);
+
 
 }

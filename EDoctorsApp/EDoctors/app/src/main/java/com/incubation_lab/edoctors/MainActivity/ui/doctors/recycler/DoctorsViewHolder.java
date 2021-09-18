@@ -19,8 +19,8 @@ public class DoctorsViewHolder extends RecyclerView.ViewHolder {
     public DoctorsViewHolder(@NonNull @NotNull View itemView) {
         super(itemView);
         name=itemView.findViewById(R.id.doctor_name);
-        speciality=itemView.findViewById(R.id.doctor_speciality);
-        currentDesignation=itemView.findViewById(R.id.doctor_designation);
+        speciality=itemView.findViewById(R.id.doctor_designation);
+        currentDesignation=itemView.findViewById(R.id.doctor_qualification);
         feeText=itemView.findViewById(R.id.doctor_fee);
         doctorImage=itemView.findViewById(R.id.doctor_image);
         ratingBar = itemView.findViewById(R.id.doctors_ratingBar);

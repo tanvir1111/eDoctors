@@ -19,13 +19,19 @@
         <activity
             android:name=".Login.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".Splash.SplashActivity">
+        <activity android:name=".Splash.SplashActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Doctors.DoctorLoginActivity" android:exported="true">
+
+
+        </activity>
+        <activity android:name=".Doctors.AppointmentListActivity" android:exported="true"/>
+        <activity android:name=".Doctors.VideoActivity" android:exported="true"/>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package com.incubation_lab.edoctors.MainActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,7 +8,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.incubation_lab.edoctors.Login.ui.LoginViewModel;
 import com.incubation_lab.edoctors.R;
-import com.incubation_lab.edoctors.Repository.Remote.RetroInterface;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -85,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 if(currentDestination== R.id.navigation_doctors){
                     navController.navigate(R.id.action_navigation_doctors_to_navigation_profile);
                 }
-                if(currentDestination== R.id.navigation_notifications){
+                if(currentDestination== R.id.navigation_appointments){
                     navController.navigate(R.id.action_navigation_notifications_to_navigation_profile);
                 }
                 if(currentDestination== R.id.navigation_med_reminder){

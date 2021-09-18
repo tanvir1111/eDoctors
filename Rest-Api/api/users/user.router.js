@@ -6,7 +6,7 @@ const router= require('express').Router()
 router.post("/register",register)
 router.post("/login",login)
 router.post("/validateToken",loginWithToken)
-router.post("/findPhone",findByPhone)
+router.post("/findByPhone",findByPhone)
 router.patch("/updatePassword",updatePassword)
 router.patch('/updatePicture',updatePicture)
 

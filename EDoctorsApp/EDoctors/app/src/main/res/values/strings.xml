@@ -21,6 +21,7 @@
     <string name="others">Others</string>
     <string name="respiratory">Respiratory</string>
     <string name="reviews">Reviews</string>
+    <string name="title_appointments">Appointments</string>
 
     <string-array name="categories">
 

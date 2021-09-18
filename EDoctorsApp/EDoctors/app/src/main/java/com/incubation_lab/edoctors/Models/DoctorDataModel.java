@@ -39,6 +39,18 @@ public class DoctorDataModel implements Serializable {
     @SerializedName("rating")
     @Expose
     private String rating;
+    @SerializedName("password")
+    @Expose
+    private String password;
+
+    public DoctorDataModel(String bmdc, String password) {
+        this.bmdc = bmdc;
+        this.password = password;
+    }
+
+    public DoctorDataModel() {
+
+    }
 
     public String getName() {
         return name;

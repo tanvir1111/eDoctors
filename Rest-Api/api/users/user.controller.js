@@ -133,7 +133,8 @@ module.exports={
                 })
             }
             if(results.length>0){
-                return res.json({serverMsg:"user already exists"})
+                results[0].serverMsg = "user already exists"
+                return res.json(results)
             }
             else{
                 return res.json({

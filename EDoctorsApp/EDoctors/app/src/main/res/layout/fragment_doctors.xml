@@ -77,12 +77,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/doctor_name_editText"
                     app:layout_constraintVertical_bias="0.0" />
 
+
         <include
             android:id="@+id/choose_departments_layout"
             layout="@layout/choose_department"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
