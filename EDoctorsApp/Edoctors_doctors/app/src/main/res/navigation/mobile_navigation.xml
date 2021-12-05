@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/navigation_home"
+    android:id="@+id/mobile_navigation.xml">
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.incubationlab.edoctors_doctors.Main.ui.Dashboard.DashboardFragment"
+        android:label="Home"
+        />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.incubationlab.edoctors_doctors.Main.ui.Settings.SettingsFragment"
+        android:label="Settings"
+        />
+    <fragment
+        android:id="@+id/navigation_health_blogs"
+        android:name="com.incubationlab.edoctors_doctors.Main.ui.HealhBlogs.HealthBlogsFragment"
+        android:label="Health Blogs"
+        />
+    <fragment
+        android:id="@+id/navigation_Profile"
+        android:name="com.incubationlab.edoctors_doctors.Main.ui.Profile.ProfileFragment"
+        android:label="Profile"
+        />
+
+
+
+</navigation>
