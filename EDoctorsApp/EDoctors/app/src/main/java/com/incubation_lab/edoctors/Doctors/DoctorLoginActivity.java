@@ -54,11 +54,13 @@ public class DoctorLoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<DoctorDataModel>() {
             @Override
             public void onResponse(Call<DoctorDataModel> call, Response<DoctorDataModel> response) {
-                if(response.isSuccessful()){
+                if(response.isSuccessful()) {
+                    if (response.code() == 200) {
 
-                    loggedInDoctorData.setValue(response.body());
-                    Toast.makeText(DoctorLoginActivity.this, loggedInDoctorData.getValue().getBmdc(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(DoctorLoginActivity.this,AppointmentListActivity.class));
+                        loggedInDoctorData.setValue(response.body());
+                        Toast.makeText(DoctorLoginActivity.this, loggedInDoctorData.getValue().getBmdc(), Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(DoctorLoginActivity.this, AppointmentListActivity.class));
+                    }
                 }
             }
 

@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.baseUrl;
+import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.BASE_URL;
 
 public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsViewHolder> {
 
@@ -54,7 +54,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsViewHo
                 holder.image.setImageResource(R.drawable.account);
             }
             else
-                Picasso.get().load(baseUrl +"/"+appointmentDataModel.getDoctorDataModel().getImageUrl()).into(holder.image);
+                Picasso.get().load(BASE_URL +"/"+appointmentDataModel.getDoctorDataModel().getImageUrl()).into(holder.image);
         }
         else {
             holder.tvQualification.setText(appointmentDataModel.getPatientData().getEmail());
@@ -64,7 +64,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsViewHo
                 holder.image.setImageResource(R.drawable.account);
             }
             else
-                Picasso.get().load(baseUrl +"/"+appointmentDataModel.getPatientData().getImageUrl()).into(holder.image);
+                Picasso.get().load(BASE_URL +"/"+appointmentDataModel.getPatientData().getImageUrl()).into(holder.image);
         }
 
 

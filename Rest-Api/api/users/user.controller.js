@@ -146,7 +146,7 @@ module.exports={
     },
     updatePicture:(req,res)=>{
         var image= req.body.image
-        var image_path="images/"+req.body.phone+".jpeg"
+        var image_path="images/users/"+req.body.phone+".jpeg"
         fs.writeFile(image_path,image,{encoding:'base64'},(err)=>{
             if(err){
                 console.log(err);
@@ -167,9 +167,7 @@ module.exports={
                     serverMsg:"picture updated"
                 })
             })
-        }
-
-        )
+        })
 
     }
 }

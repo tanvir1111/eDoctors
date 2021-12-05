@@ -30,6 +30,15 @@ public class AppointmentsViewModel extends AndroidViewModel {
     public LiveData<ArrayList<AppointmentDataModel>> getPatientAppointmentList(String patientId) {
         return appointmentsRepository.getPatientAppointmentList(patientId);
     }
+
+    public LiveData<String> updateCurrentSerial(AppointmentDataModel appointmentDataModel) {
+        return appointmentsRepository.updateCurrentSerial(appointmentDataModel);
+    }
+
+    public LiveData<String> getCurrentSerial(String doctorId) {
+
+        return appointmentsRepository.getCurrentSerial(doctorId);
+    }
 //    public LiveData<ArrayList<AppointmentDataModel>> getPatientAppointmentList(String doctorId){
 //        return appointmentsRepository.getDoctorAppointmentList();
 //    }

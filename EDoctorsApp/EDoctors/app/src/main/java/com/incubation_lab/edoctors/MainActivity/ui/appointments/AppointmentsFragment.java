@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,10 +41,13 @@ public class AppointmentsFragment extends Fragment {
         rvAppointments = root.findViewById(R.id.rv_appointments);
         rvAppointments.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         AppointmentsAdapter appointmentsAdapter = new AppointmentsAdapter("patient",appointmentData -> {
-            Intent intent = new Intent(getContext(), VideoActivity.class);
-            intent.putExtra("appointmentData",appointmentData);
-
-            startActivity(intent);
+//            Intent intent = new Intent(getContext(), VideoActivity.class);
+//            intent.putExtra("appointmentData",appointmentData);
+//
+//            startActivity(intent);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("appointmentData",appointmentData);
+            Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_navigation_appointments_to_navigation_appointment_details,bundle);
 
 
         });

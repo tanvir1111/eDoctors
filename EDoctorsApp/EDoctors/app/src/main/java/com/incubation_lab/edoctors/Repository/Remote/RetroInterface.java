@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 import com.incubation_lab.edoctors.Models.AppointmentDataModel;
@@ -56,4 +57,10 @@ public interface RetroInterface {
     Call<ArrayList<AppointmentDataModel>> getDoctorAppointmentList(  @Path("doctor_id") String doctorId);
 
 
+
+    @POST("/api/appointment/updateCurrentSerial")
+    Call<AppointmentDataModel> updateCurrentSerial(@Body AppointmentDataModel appointmentDataModel);
+
+    @GET("/api/appointment/getCurrentSerial/{doctor_id}")
+    Call<AppointmentDataModel> getCurrentSerial(@Path("doctor_id") String doctorId);
 }

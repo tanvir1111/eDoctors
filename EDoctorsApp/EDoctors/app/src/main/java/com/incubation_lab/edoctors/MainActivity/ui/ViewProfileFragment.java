@@ -1,22 +1,15 @@
 package com.incubation_lab.edoctors.MainActivity.ui;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -27,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,15 +31,12 @@ import com.incubation_lab.edoctors.Models.UserDataModel;
 import com.incubation_lab.edoctors.Models.UserImageModel;
 import com.incubation_lab.edoctors.R;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInstance;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
@@ -86,7 +77,7 @@ public class ViewProfileFragment extends Fragment {
         phone.setText(userData.getPhone());
         date_of_birth.setText(userData.getDateOfBirth());
         bloodGroup.setText(userData.getEmail());
-        Picasso.get().load(RetroInstance.baseUrl + "/" + userData.getImageUrl()).placeholder(R.drawable.account).into(profileImage);
+        Picasso.get().load(RetroInstance.BASE_URL + "/" + userData.getImageUrl()).placeholder(R.drawable.account).into(profileImage);
 
 
         update_picture_btn.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +174,7 @@ public class ViewProfileFragment extends Fragment {
                     @Override
                     public void onChanged(String s) {
                         if (s.equals(PICTURE_UPDATE_SUCCESS)) {
-                            Picasso.get().load(RetroInstance.baseUrl + "/" + userData.getImageUrl()).memoryPolicy(MemoryPolicy.NO_CACHE).into(profileImage);
+                            Picasso.get().load(RetroInstance.BASE_URL + "/" + userData.getImageUrl()).memoryPolicy(MemoryPolicy.NO_CACHE).into(profileImage);
 
                             alertDialog.dismiss();
                         }

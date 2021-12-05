@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.baseUrl;
+import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.BASE_URL;
 import static com.incubation_lab.edoctors.StaticData.DOCTOR_BUNDLE_KEY;
 
 public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsViewHolder> {
@@ -53,7 +53,7 @@ public class DoctorsAdapter extends RecyclerView.Adapter<DoctorsViewHolder> {
         holder.speciality.setText(doctors.get(position).getSpeciality());
         holder.currentDesignation.setText(doctors.get(position).getCurrentDesignation());
         holder.feeText.setText(doctors.get(position).getFee() + " BDT");
-        Picasso.get().load(baseUrl +"/"+ doctors.get(position).getImageUrl()).placeholder(R.drawable.icon_doctor).into(holder.doctorImage);
+        Picasso.get().load(BASE_URL +"/"+ doctors.get(position).getImageUrl()).placeholder(R.drawable.icon_doctor).into(holder.doctorImage);
         holder.ratingBar.setRating(Float.parseFloat(doctors.get(position).getRating()));
 
         Bundle bundle = new Bundle();

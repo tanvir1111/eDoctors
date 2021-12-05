@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_navigation_notifications_to_navigation_profile"
             app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_appointments_to_navigation_appointment_details"
+            app:destination="@id/navigation_appointment_details" />
     </fragment>
     <fragment
         android:id="@+id/navigation_doctors"
@@ -49,9 +52,9 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_med_reminder"
-        android:name="com.incubation_lab.edoctors.MainActivity.ui.doctors.DoctorsFragment"
+        android:name="com.incubation_lab.edoctors.MainActivity.ui.medicine_reminder.MedicineReminderFragment"
         android:label="@string/title_doctors"
-        tools:layout="@layout/fragment_doctors" >
+        tools:layout="@layout/fragment_medicine_reminder" >
         <action
             android:id="@+id/action_navigation_med_reminder_to_navigation_profile"
             app:destination="@id/navigation_profile" />
@@ -67,4 +70,9 @@
         android:name="com.incubation_lab.edoctors.MainActivity.ui.doctors.ViewDoctorProfileFragment"
 
         tools:layout="@layout/fragment_view_doctor_profile" />
+    <fragment
+        android:id="@+id/navigation_appointment_details"
+        android:name="com.incubation_lab.edoctors.MainActivity.ui.appointments.AppointmentDetailsFragment"
+
+        tools:layout="@layout/fragment_appointment_details" />
 </navigation>

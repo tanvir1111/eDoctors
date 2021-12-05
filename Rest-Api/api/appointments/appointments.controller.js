@@ -1,4 +1,4 @@
-const {getAppointment,getDoctorAppointmentList,getPatientAppointmentList} = require('./appointments.service')
+const {getAppointment,getDoctorAppointmentList,getPatientAppointmentList, updateCurrentSerial,getCurrentSerial} = require('./appointments.service')
 
 module.exports ={
     getAppointment: (req,res) =>{
@@ -33,6 +33,33 @@ module.exports ={
             }
             return res.status(200).json(results)
         })
+    },
+    updateCurrentSerial: (req,res) =>{
+    
+        updateCurrentSerial(req.body,(err)=>{
+       
+            if(err){
+                console.log(err.message);
+                return res.status(500).json({serverMsg:err.message})
+            }
+        
+            return res.status(200).json({serverMsg:"success"})
+
+        })
+
+    },
+    getCurrentSerial:(req,res) =>{
+        getCurrentSerial(req.params.doctor_id,(err,results)=>{
+            if(err){
+                return res.status(500).json({
+                    serverMsg:err.message
+                })
+            }
+        
+        
+            return res.status(200).json(results[0])
+        })
+
     }
 
 }

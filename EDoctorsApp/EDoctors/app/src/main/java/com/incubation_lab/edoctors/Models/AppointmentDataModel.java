@@ -18,10 +18,10 @@ public class AppointmentDataModel implements Serializable {
     @Expose
     String date;
 
-    @Expose
-    String serverMsg;
+
 
     @Expose
+    @SerializedName("serial")
     String serial;
 
     @Expose
@@ -35,12 +35,17 @@ public class AppointmentDataModel implements Serializable {
     @SerializedName("doctorData")
     DoctorDataModel doctorDataModel;
 
-
+    @Expose
+    String serverMsg;
 
     public AppointmentDataModel(String patientId, String doctorId, String date) {
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.date = date;
+    }
+    public AppointmentDataModel(String doctorId,String serial){
+        this.doctorId = doctorId;
+        this.serial =serial;
     }
 
     public String getPatientId() {

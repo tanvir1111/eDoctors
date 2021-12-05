@@ -23,7 +23,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.baseUrl;
+import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.BASE_URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         profileIcon= findViewById(R.id.profile_icon);
         loginViewModel= new ViewModelProvider(this).get(LoginViewModel.class);
 
-        Picasso.get().load(baseUrl+"/"+loginViewModel.getLoggedInUser().getValue().getImageUrl()).placeholder(R.drawable.account).into(profileIcon);
+        Picasso.get().load(BASE_URL +"/"+loginViewModel.getLoggedInUser().getValue().getImageUrl()).placeholder(R.drawable.account).into(profileIcon);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

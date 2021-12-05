@@ -31,4 +31,10 @@
         <item name="android:gravity">center</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
     </style>
+    <style name="Theme.EDoctors.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.EDoctors.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.EDoctors.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

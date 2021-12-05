@@ -23,7 +23,7 @@ import com.incubation_lab.edoctors.Login.ui.LoginViewModel;
 import com.incubation_lab.edoctors.R;
 import com.squareup.picasso.Picasso;
 
-import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.baseUrl;
+import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.BASE_URL;
 import static com.incubation_lab.edoctors.StaticData.DOCTOR_BUNDLE_KEY;
 
 public class ViewDoctorProfileFragment extends Fragment {
@@ -68,7 +68,7 @@ public class ViewDoctorProfileFragment extends Fragment {
         tvDesignation.setText(doctorData.getCurrentDesignation());
         tvDegree.setText(doctorData.getQualifications());
         tvAbout.setText(doctorData.getBio());
-        Picasso.get().load(baseUrl+"/"+doctorData.getImageUrl()).into(ivDoctorImage);
+        Picasso.get().load(BASE_URL +"/"+doctorData.getImageUrl()).into(ivDoctorImage);
         rbDoctorRating.setRating(Float.parseFloat(doctorData.getRating()));
         doctorsViewModel = new ViewModelProvider(this).get(DoctorsViewModel.class);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
