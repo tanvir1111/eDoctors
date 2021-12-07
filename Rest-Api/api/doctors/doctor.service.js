@@ -46,6 +46,11 @@ module.exports = {
         console.log(err.message);
         return callback(err)
       }
+      pool.query("INSERT INTO `current_serial`(`doctor_id`, `serial`) VALUES (?,?)"[data.bmdc,0],(err,results)=>{
+        if(err){
+          callback(err)
+        }
+      } )
       return callback(null,results)
     }
     )

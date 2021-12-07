@@ -140,7 +140,7 @@ public class UserRepository {
         });
     }
     public void findPhone(String phone) {
-        Call<UserDataModel> call=retroInterface.findByPhone(new UserDataModel(phone,""));
+        Call<UserDataModel> call=retroInterface.findByPhone(new UserDataModel(""+phone,""));
         call.enqueue(new Callback<UserDataModel>() {
             @Override
             public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
@@ -153,7 +153,7 @@ public class UserRepository {
 
             @Override
             public void onFailure(Call<UserDataModel> call, Throwable t) {
-                Toast.makeText(application, "Network Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(application, t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

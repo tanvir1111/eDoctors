@@ -20,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -75,7 +74,7 @@ public class ViewProfileFragment extends Fragment {
 
         username.setText(userData.getFirstName() + " " + userData.getLastName());
         phone.setText(userData.getPhone());
-        date_of_birth.setText(userData.getDateOfBirth());
+        date_of_birth.setText(userData.getAge());
         bloodGroup.setText(userData.getEmail());
         Picasso.get().load(RetroInstance.BASE_URL + "/" + userData.getImageUrl()).placeholder(R.drawable.account).into(profileImage);
 

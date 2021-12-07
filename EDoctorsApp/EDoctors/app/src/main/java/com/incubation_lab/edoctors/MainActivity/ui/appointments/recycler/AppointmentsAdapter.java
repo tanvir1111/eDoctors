@@ -58,7 +58,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsViewHo
         }
         else {
             holder.tvQualification.setText(appointmentDataModel.getPatientData().getEmail());
-            holder.tvDesignation.setText(appointmentDataModel.getPatientData().getDateOfBirth());
+            holder.tvDesignation.setText(appointmentDataModel.getPatientData().getAge());
             holder.tvDoctorName.setText(appointmentDataModel.getPatientData().getFirstName()+" " +appointmentDataModel.getPatientData().getLastName());
             if(appointmentDataModel.getPatientData().getImageUrl().toLowerCase().equals("not set")){
                 holder.image.setImageResource(R.drawable.account);

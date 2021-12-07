@@ -16,20 +16,20 @@ module.exports = {
 
   getAppointment: (data, callback) => {
 
-    pool.query(`select max(serial) as max from appointments where doctor_id=?`, [data.doctorId], (err, serialResult) => {
+    pool.query(`select max(serial) as max from appointments where doctor_id=?`, [data.doctor_id], (err, serialResult) => {
       if (err) {
         return callback(err);
       }
       var serial = JSON.parse(JSON.stringify(serialResult))[0].max
-      var link = data.patientId.toString() + data.doctorId.toString() + Date.now().toString()
+      var link = data.patient_id.toString() + data.doctor_id.toString() + Date.now().toString()
       console.log(serial);
       if (serial == null) {
         serial = 0
       }
       pool.query(`Insert into appointments(doctor_id,patient_id,link,payment_status,date,serial) values(?,?,?,?,?,?) `,
         [
-          data.doctorId,
-          data.patientId,
+          data.doctor_id,
+          data.patient_id,
           link,
           0,
           data.date,

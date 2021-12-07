@@ -19,6 +19,7 @@ module.exports ={
                     serverMsg:err.message
                 })
             }
+            console.log(results)
         
         
             return res.status(200).json(results)

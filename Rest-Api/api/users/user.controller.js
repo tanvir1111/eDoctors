@@ -122,10 +122,11 @@ module.exports={
 
     },
     findByPhone:(req,res)=>{
+        console.log(req.body);
         const body = req.body
         findByPhone(body.phone,(err,results)=>{
             if(err){
-                return res.json({serverMsg:err.message})
+                return res.status(500)
             }
             if(!results){
                 return res.json({
@@ -134,7 +135,7 @@ module.exports={
             }
             if(results.length>0){
                 results[0].serverMsg = "user already exists"
-                return res.json(results)
+                return res.json(results[0])
             }
             else{
                 return res.json({

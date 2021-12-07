@@ -1,11 +1,13 @@
-package com.incubation_lab.edoctors.Models;
+package com.incubationlab.edoctors_doctors.Models;
+
+
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class UserDataModel implements Serializable {
+public class PatientDataModel implements Serializable {
     @SerializedName("first_name")
     @Expose
     private String firstName;
@@ -39,15 +41,15 @@ public class UserDataModel implements Serializable {
 
 
 
-    public UserDataModel(String phone, String password) {
+    public PatientDataModel(String phone, String password) {
         this.password = password;
         this.phone = phone;
     }
-    public UserDataModel(String token) {
+    public PatientDataModel(String token) {
         this.token = token;
     }
 
-    public UserDataModel(String firstName, String lastName, String phone, String email, String age, String gender, String password  ) {
+    public PatientDataModel(String firstName, String lastName, String phone, String email, String age, String gender, String password  ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

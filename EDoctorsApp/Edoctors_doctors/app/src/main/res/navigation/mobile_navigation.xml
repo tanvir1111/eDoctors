@@ -23,6 +23,20 @@
         android:name="com.incubationlab.edoctors_doctors.Main.ui.Profile.ProfileFragment"
         android:label="Profile"
         />
+    <fragment
+        android:id="@+id/navigation_appointments"
+        android:name="com.incubationlab.edoctors_doctors.Main.ui.Appointments.AppointmentsFragment"
+        android:label="Appointments"
+        >
+        <action
+            android:id="@+id/action_navigation_appointments_to_navigation_appointment_details"
+            app:destination="@id/navigation_appointment_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_appointment_details"
+        android:name="com.incubationlab.edoctors_doctors.Main.ui.Appointments.AppointmentDetailsFragment"
+        android:label="Appointment Details"
+        />
 
 
 

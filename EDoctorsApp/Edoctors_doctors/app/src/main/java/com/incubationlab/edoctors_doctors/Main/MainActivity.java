@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
+        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment_main);
         NavigationUI.setupWithNavController(navigationView, navController);
 
         drawerBtn.setOnClickListener(new View.OnClickListener() {

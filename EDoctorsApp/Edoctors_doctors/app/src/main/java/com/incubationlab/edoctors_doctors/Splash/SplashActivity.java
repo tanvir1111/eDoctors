@@ -65,6 +65,7 @@ public class SplashActivity extends AppCompatActivity {
                         Toast.makeText(SplashActivity.this, "Welcome " + LoggedInDoctorData.getValue().getLastName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                         startActivity(intent);
+                        finish();
                     } else {
                         Toast.makeText(SplashActivity.this, "Session Expired", Toast.LENGTH_SHORT).show();
                         animateToLogin();
@@ -100,6 +101,7 @@ public class SplashActivity extends AppCompatActivity {
             public void onAnimationEnd(Animator animation) {
                 Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override

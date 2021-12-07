@@ -3,13 +3,13 @@ const pool = require("../../config/db_conn");
 module.exports = {
   register: (data, callback) => {
     pool.query(
-      `insert into users (phone,first_name,last_name,email,date_of_birth,gender,password) values(?,?,?,?,?,?,?)`,
+      `insert into users (phone,first_name,last_name,email,age,gender,password) values(?,?,?,?,?,?,?)`,
       [
         data.phone,
         data.first_name,
         data.last_name,
         data.email,
-        data.date_of_birth,
+        data.age,
         data.gender,
         data.password,
       ],
