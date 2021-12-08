@@ -69,7 +69,8 @@ public class AppointmentDetailsFragment extends Fragment {
         doctorDesignation.setText(appointmentDataModel.getDoctorDataModel().getCurrentDesignation());
         doctorQualifications.setText(appointmentDataModel.getDoctorDataModel().getQualifications());
         tvUserSerial.setText(appointmentDataModel.getSerial());
-        Picasso.get().load( BASE_URL +"/" + appointmentDataModel.getDoctorDataModel().getImageUrl()).into(doctorImg);
+        if(!appointmentDataModel.getDoctorDataModel().getImageUrl().equals("not set"))
+            Picasso.get().load( BASE_URL +"/" + appointmentDataModel.getDoctorDataModel().getImageUrl()).into(doctorImg);
         setupConference();
 
         joinBtn.setEnabled(false);
@@ -214,7 +215,7 @@ public class AppointmentDetailsFragment extends Fragment {
                 public void onChanged(String s) {
                     tvCurrentSerial.setText(s);
                     int distance = Integer.parseInt(appointmentDataModel.getSerial())-Integer.parseInt(s);
-                    if(distance >0 && distance <3 ){
+                    if(distance >=0 && distance <3 ){
                         joinBtn.setEnabled(true);
                     }
                     else {
