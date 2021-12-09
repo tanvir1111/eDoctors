@@ -1,12 +1,16 @@
 package com.incubation_lab.edoctors.Repository;
 
 import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.incubation_lab.edoctors.Models.AppointmentDataModel;
+import com.incubation_lab.edoctors.Models.MedicineDataModel;
+import com.incubation_lab.edoctors.Models.PrescriptionDataModel;
+import com.incubation_lab.edoctors.Repository.Remote.PrescriptionGetterInterface;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInstance;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInterface;
 
@@ -21,8 +25,10 @@ public class AppointmentsRepository {
     private RetroInterface retroInterface;
 
 
+
     public AppointmentsRepository(Application application) {
         retroInterface= RetroInstance.getRetro();
+
         this.application= application;
 //        fetchDoctorAppointmentList("12345");
 
@@ -32,6 +38,7 @@ public class AppointmentsRepository {
     private MutableLiveData<ArrayList<AppointmentDataModel>> appointmentList=new MutableLiveData<>();
     private MutableLiveData<String> updateSerialMsg =new MutableLiveData<>();
     private MutableLiveData<String> currentSerial =new MutableLiveData<>();
+    private MutableLiveData<PrescriptionDataModel> prescriptionLiveData = new MutableLiveData<>();;
     public void fetchAppointmentList(String id,String mode) {
         Call<ArrayList<AppointmentDataModel>> call;
         if(mode.equals("doctor")) {
@@ -128,5 +135,44 @@ public class AppointmentsRepository {
             }
         });
         return currentSerial;
+    }
+
+    public void getPatientPrescription(String appointment_id, PrescriptionGetterInterface prescriptionGetterInterface) {
+        Call<PrescriptionDataModel> call = retroInterface.getPrescription(appointment_id);
+
+        Log.d("app_id", appointment_id);
+        call.enqueue(new Callback<PrescriptionDataModel>() {
+            @Override
+            public void onResponse(Call<PrescriptionDataModel> call, Response<PrescriptionDataModel> response) {
+                if (response.isSuccessful() && response.code() == 200) {
+                    PrescriptionDataModel prescriptionDataModel = response.body();
+                    prescriptionDataModel.setMedicineDataModels(makeMedDataFromString(prescriptionDataModel.getMedicineString()));
+                    prescriptionGetterInterface.onSuccess(prescriptionDataModel);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PrescriptionDataModel> call, Throwable t) {
+                Toast.makeText(application, t.getMessage(), Toast.LENGTH_SHORT).show();
+                prescriptionGetterInterface.onFailure();
+
+            }
+        });
+    }
+
+    private ArrayList<MedicineDataModel> makeMedDataFromString(String medString){
+        ArrayList<MedicineDataModel> medicineDataModels= new ArrayList<>();
+
+        String[] meds = medString.split("#n");
+
+        for(int i=0;i<meds.length-1;i++){
+            String[] singleMed = meds[i].split("#r");
+            medicineDataModels.add(new MedicineDataModel(singleMed[0],singleMed[1],singleMed[2],singleMed[3],singleMed[4]));
+
+
+        }
+
+        return medicineDataModels;
     }
 }

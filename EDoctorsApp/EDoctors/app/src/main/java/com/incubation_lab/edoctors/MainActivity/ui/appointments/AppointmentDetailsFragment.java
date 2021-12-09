@@ -1,7 +1,6 @@
 package com.incubation_lab.edoctors.MainActivity.ui.appointments;
 
 import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.BASE_URL;
-import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.getRetro;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -14,14 +13,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.incubation_lab.edoctors.MainActivity.ui.appointments.recycler.PrescriptionAdapter;
 import com.incubation_lab.edoctors.Models.AppointmentDataModel;
+import com.incubation_lab.edoctors.Models.PrescriptionDataModel;
 import com.incubation_lab.edoctors.R;
+import com.incubation_lab.edoctors.Repository.Remote.PrescriptionGetterInterface;
 import com.squareup.picasso.Picasso;
 
 import org.jitsi.meet.sdk.JitsiMeet;
@@ -38,11 +43,12 @@ public class AppointmentDetailsFragment extends Fragment {
     private int animCycleCount=0;
     private Button joinBtn;
     private String roomId;
-
+    private RecyclerView rvPrescription;
     private TextView doctorName,doctorDesignation,doctorQualifications, tvCurrentSerial,tvUserSerial;
     private ImageView doctorImg;
     private AppointmentDataModel appointmentDataModel;
     private AppointmentsViewModel appointmentsViewModel;
+    private PrescriptionAdapter prescriptionAdapter;
 
     private Handler handler = new Handler();
     private Runnable runnable;
@@ -54,6 +60,7 @@ public class AppointmentDetailsFragment extends Fragment {
         liveProgressBar = root.findViewById(R.id.mf_progress_bar);
         forwardAnimation();
         appointmentsViewModel = new ViewModelProvider(this).get(AppointmentsViewModel.class);
+        prescriptionAdapter = new PrescriptionAdapter();
 
         joinBtn = root.findViewById(R.id.joinBtn);
         doctorName = root.findViewById(R.id.tv_chamber_doctor_name);
@@ -62,13 +69,19 @@ public class AppointmentDetailsFragment extends Fragment {
         doctorImg = root.findViewById(R.id.iv_chamber_doctor_img);
         tvCurrentSerial = root.findViewById(R.id.tv_chamber_current_serial);
         tvUserSerial = root.findViewById(R.id.tv_chamber_user_serial);
+        rvPrescription = root.findViewById(R.id.rv_prescription);
 
         appointmentDataModel= (AppointmentDataModel) getArguments().getSerializable("appointmentData");
+
+        rvPrescription.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        rvPrescription.setAdapter(prescriptionAdapter);
 
         doctorName.setText(appointmentDataModel.getDoctorDataModel().getName());
         doctorDesignation.setText(appointmentDataModel.getDoctorDataModel().getCurrentDesignation());
         doctorQualifications.setText(appointmentDataModel.getDoctorDataModel().getQualifications());
         tvUserSerial.setText(appointmentDataModel.getSerial());
+        getPrescription(appointmentDataModel.getLink());
+
         if(!appointmentDataModel.getDoctorDataModel().getImageUrl().equals("not set"))
             Picasso.get().load( BASE_URL +"/" + appointmentDataModel.getDoctorDataModel().getImageUrl()).into(doctorImg);
         setupConference();
@@ -96,6 +109,22 @@ public class AppointmentDetailsFragment extends Fragment {
 
 
         return root;
+    }
+
+    private void getPrescription(String link) {
+        appointmentsViewModel.getPrescription(link, new PrescriptionGetterInterface() {
+            @Override
+            public void onSuccess(PrescriptionDataModel prescriptionDataModel) {
+
+                prescriptionAdapter.setMedicineData(prescriptionDataModel.getMedicineDataModels());
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(getContext(), "failed", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void reverseAnimation(){
@@ -231,5 +260,7 @@ public class AppointmentDetailsFragment extends Fragment {
         }
 
     }
+
+
 
 }

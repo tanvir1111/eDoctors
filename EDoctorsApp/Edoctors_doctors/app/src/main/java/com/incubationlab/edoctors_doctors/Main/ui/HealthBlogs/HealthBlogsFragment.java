@@ -1,4 +1,4 @@
-package com.incubationlab.edoctors_doctors.Main.ui.HealhBlogs;
+package com.incubationlab.edoctors_doctors.Main.ui.HealthBlogs;
 
 import android.os.Bundle;
 

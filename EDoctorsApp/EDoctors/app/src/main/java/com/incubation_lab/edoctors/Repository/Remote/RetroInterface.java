@@ -13,6 +13,7 @@ import retrofit2.http.Query;
 
 import com.incubation_lab.edoctors.Models.AppointmentDataModel;
 import com.incubation_lab.edoctors.Models.DoctorDataModel;
+import com.incubation_lab.edoctors.Models.PrescriptionDataModel;
 import com.incubation_lab.edoctors.Models.UserDataModel;
 import com.incubation_lab.edoctors.Models.UserImageModel;
 
@@ -63,4 +64,7 @@ public interface RetroInterface {
 
     @GET("/api/appointment/getCurrentSerial/{doctor_id}")
     Call<AppointmentDataModel> getCurrentSerial(@Path("doctor_id") String doctorId);
+
+    @GET("/api/prescription/getPrescription/{appointment_id}")
+    Call<PrescriptionDataModel> getPrescription( @Path("appointment_id") String appointment_id);
 }

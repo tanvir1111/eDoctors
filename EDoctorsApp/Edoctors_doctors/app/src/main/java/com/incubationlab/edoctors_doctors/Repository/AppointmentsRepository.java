@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.incubationlab.edoctors_doctors.Models.AppointmentDataModel;
+import com.incubationlab.edoctors_doctors.Models.PrescriptionDataModel;
+import com.incubationlab.edoctors_doctors.Models.ResponseModel;
 import com.incubationlab.edoctors_doctors.Repository.RemoteAPI.RetroInstance;
 import com.incubationlab.edoctors_doctors.Repository.RemoteAPI.RetroInterface;
 
@@ -71,6 +73,21 @@ public class AppointmentsRepository {
             @Override
             public void onFailure(Call<AppointmentDataModel> call, Throwable t) {
                 requestInterface.onFailure("Server Error");
+
+            }
+        });
+    }
+
+    public void addPrescription(PrescriptionDataModel prescriptionDataModel, RemoteRequestInterface requestInterface) {
+        Call<ResponseModel> call = retroInterface.addPrescription(prescriptionDataModel);
+        call.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
 
             }
         });

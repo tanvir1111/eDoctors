@@ -15,7 +15,7 @@
         />
     <fragment
         android:id="@+id/navigation_health_blogs"
-        android:name="com.incubationlab.edoctors_doctors.Main.ui.HealhBlogs.HealthBlogsFragment"
+        android:name="com.incubationlab.edoctors_doctors.Main.ui.HealthBlogs.HealthBlogsFragment"
         android:label="Health Blogs"
         />
     <fragment

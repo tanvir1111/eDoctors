@@ -2,6 +2,8 @@ package com.incubationlab.edoctors_doctors.Main.ui.Appointments;
 
 import static com.incubationlab.edoctors_doctors.Repository.RemoteAPI.RetroInstance.BASE_URL;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -9,16 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.incubationlab.edoctors_doctors.Main.ui.Appointments.recycler.PrescriptionAdapter;
 import com.incubationlab.edoctors_doctors.Models.AppointmentDataModel;
+import com.incubationlab.edoctors_doctors.Models.MedicineDataModel;
+import com.incubationlab.edoctors_doctors.Models.PrescriptionDataModel;
 import com.incubationlab.edoctors_doctors.R;
 import com.incubationlab.edoctors_doctors.Repository.RemoteRequestInterface;
 import com.squareup.picasso.Picasso;
@@ -29,6 +35,9 @@ import org.jitsi.meet.sdk.JitsiMeetConferenceOptions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class AppointmentDetailsFragment extends Fragment {
 
@@ -36,8 +45,11 @@ public class AppointmentDetailsFragment extends Fragment {
     private ImageView ivPatientImage;
     private AppointmentDataModel appointmentData;
     private String roomId;
-    private Button joinBtn;
+    private Button joinBtn,addMedBtn,uploadBtn;
     private AppointmentsViewModel appointmentsViewModel;
+    private EditText etMedName,etQtyMorning,etQtyDay,etQtyNight,etCourseDays;
+    private RecyclerView rvPrescription;
+    private PrescriptionAdapter prescriptionAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +71,16 @@ public class AppointmentDetailsFragment extends Fragment {
         tvGender = root.findViewById(R.id.appointment_details_patient_gender);
         tvSerial = root.findViewById(R.id.appointment_details_appointment_serial);
         ivPatientImage = root.findViewById(R.id.appointment_details_patient_image);
+        etMedName = root.findViewById(R.id.et_med_name);
+        etQtyMorning = root.findViewById(R.id.et_med_routine_morning);
+        etQtyDay = root.findViewById(R.id.et_med_routine_day);
+        etQtyNight = root.findViewById(R.id.et_med_routine_night);
+        etCourseDays = root.findViewById(R.id.et_med_routine_course_time);
+        addMedBtn = root.findViewById(R.id.btn_add_medicine);
+        uploadBtn = root.findViewById(R.id.btn_prescription_upload);
+        rvPrescription = root.findViewById(R.id.rv_prescription);
 
+        prescriptionAdapter = new PrescriptionAdapter();
         appointmentData = (AppointmentDataModel) getArguments().getSerializable("appointmentData");
         tvName.setText(appointmentData.getPatientData().getFirstName() + " " +appointmentData.getPatientData().getLastName());
         tvAge.setText(appointmentData.getPatientData().getAge());
@@ -68,6 +89,8 @@ public class AppointmentDetailsFragment extends Fragment {
         Picasso.get().load(BASE_URL+ "/"+appointmentData.getPatientData().getImageUrl()).into(ivPatientImage);
         roomId= appointmentData.getLink();
 
+        rvPrescription.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        rvPrescription.setAdapter(prescriptionAdapter);
 
 
         joinBtn = root.findViewById(R.id.joinBtn);
@@ -128,8 +151,94 @@ public class AppointmentDetailsFragment extends Fragment {
             }
         });
 
+        addMedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!checkIfEmpty(new EditText[] {etCourseDays,etMedName,etQtyMorning,etQtyDay,etQtyNight})){
+                    addMedicine();
+                }
+            }
+        });
+
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                uploadPrescription();
+
+
+            }
+        });
+
 
 
         return root;
     }
+
+    private void uploadPrescription() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle("Are you sure?");
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                // Do do my action here
+                appointmentsViewModel.addPrescription(new PrescriptionDataModel(appointmentData.getLink(), prescriptionAdapter.getPrescriptionData(), date), new RemoteRequestInterface() {
+                    @Override
+                    public void onSuccess(int code, String msg) {
+                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(String msg) {
+
+                    }
+                });
+                dialog.dismiss();
+            }
+
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // I do not need any action here you might
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void addMedicine() {
+
+        String medicineName = etMedName.getText().toString();
+        String qtyMorning = etQtyMorning.getText().toString();
+        String qtyDay = etQtyDay.getText().toString();
+        String qtyNight = etQtyNight.getText().toString();
+        String courseDays = etCourseDays.getText().toString();
+
+        MedicineDataModel medicineDataModel = new MedicineDataModel(medicineName,qtyMorning,qtyDay,qtyNight,courseDays);
+        prescriptionAdapter.addMedicine(medicineDataModel);
+
+    }
+
+    private Boolean checkIfEmpty(EditText[] evs) {
+        for (EditText v:
+                evs) {
+            if(v.getText().toString().isEmpty())
+            {
+                v.setError("Field Required");
+                v.requestFocus();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

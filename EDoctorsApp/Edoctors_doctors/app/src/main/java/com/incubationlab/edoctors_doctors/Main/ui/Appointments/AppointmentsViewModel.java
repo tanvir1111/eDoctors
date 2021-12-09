@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.incubationlab.edoctors_doctors.Models.AppointmentDataModel;
+import com.incubationlab.edoctors_doctors.Models.PrescriptionDataModel;
 import com.incubationlab.edoctors_doctors.Repository.AppointmentsRepository;
 import com.incubationlab.edoctors_doctors.Repository.RemoteRequestInterface;
 
@@ -28,4 +29,12 @@ public class AppointmentsViewModel extends ViewModel {
     public void updateCurrentSerial(AppointmentDataModel appointmentDataModel,RemoteRequestInterface requestInterface) {
         appointmentsRepository.updateCurrentSerial(appointmentDataModel,requestInterface);
     }
+
+    public void addPrescription(PrescriptionDataModel prescriptionDataModel, RemoteRequestInterface requestInterface) {
+        appointmentsRepository.addPrescription(prescriptionDataModel,requestInterface);
+    }
+
+
+
+
 }

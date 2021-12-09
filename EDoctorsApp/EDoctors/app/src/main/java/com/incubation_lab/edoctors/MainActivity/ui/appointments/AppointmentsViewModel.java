@@ -8,7 +8,9 @@ import androidx.lifecycle.LiveData;
 
 
 import com.incubation_lab.edoctors.Models.AppointmentDataModel;
+import com.incubation_lab.edoctors.Models.PrescriptionDataModel;
 import com.incubation_lab.edoctors.Repository.AppointmentsRepository;
+import com.incubation_lab.edoctors.Repository.Remote.PrescriptionGetterInterface;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +41,7 @@ public class AppointmentsViewModel extends AndroidViewModel {
 
         return appointmentsRepository.getCurrentSerial(doctorId);
     }
-//    public LiveData<ArrayList<AppointmentDataModel>> getPatientAppointmentList(String doctorId){
-//        return appointmentsRepository.getDoctorAppointmentList();
-//    }
+    public void getPrescription(String appointment_id, PrescriptionGetterInterface prescriptionGetterInterface){
+         appointmentsRepository.getPatientPrescription(appointment_id,prescriptionGetterInterface);
+    }
 }

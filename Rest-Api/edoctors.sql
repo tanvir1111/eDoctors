@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2021 at 04:39 AM
+-- Generation Time: Dec 09, 2021 at 02:31 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -104,6 +104,25 @@ INSERT INTO `doctors` (`first_name`, `last_name`, `bmdc`, `phone`, `speciality`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `prescriptions`
+--
+
+CREATE TABLE `prescriptions` (
+  `appointment_id` varchar(255) NOT NULL,
+  `medicines` varchar(1024) NOT NULL,
+  `date` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `prescriptions`
+--
+
+INSERT INTO `prescriptions` (`appointment_id`, `medicines`, `date`) VALUES
+('+880170892448612345671638799323342', 'med1#r1#r0#r1#r28#nmed2#r0#r0#r1#r28#n', '2021-12-09');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -150,6 +169,12 @@ ALTER TABLE `current_serial`
 --
 ALTER TABLE `doctors`
   ADD PRIMARY KEY (`bmdc`);
+
+--
+-- Indexes for table `prescriptions`
+--
+ALTER TABLE `prescriptions`
+  ADD PRIMARY KEY (`appointment_id`);
 
 --
 -- Indexes for table `users`

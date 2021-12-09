@@ -4,6 +4,7 @@ package com.incubationlab.edoctors_doctors.Repository.RemoteAPI;
 
 import com.incubationlab.edoctors_doctors.Models.AppointmentDataModel;
 import com.incubationlab.edoctors_doctors.Models.DoctorDataModel;
+import com.incubationlab.edoctors_doctors.Models.PrescriptionDataModel;
 import com.incubationlab.edoctors_doctors.Models.ResponseModel;
 
 import java.util.ArrayList;
@@ -29,4 +30,7 @@ public interface RetroInterface {
 
     @POST("/api/appointment/updateCurrentSerial")
     Call<AppointmentDataModel> updateCurrentSerial(@Body AppointmentDataModel appointmentDataModel);
+
+    @POST("/api/prescription/add")
+    Call<ResponseModel> addPrescription(@Body PrescriptionDataModel prescriptionDataModel);
 }

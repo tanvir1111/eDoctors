@@ -6,42 +6,65 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class DoctorDataModel implements Serializable {
-    @SerializedName("name")
+
     @Expose
-    private String name;
+    @SerializedName("first_name")
+    private String firstName;
+
+    @Expose
+    @SerializedName("last_name")
+    private  String lastName;
+
+    @Expose
+    private String designation;
+
+    @Expose
+    private String qualifications;
+    @SerializedName("starting_time")
+    @Expose
+    private String startTime;
+
+    @Expose
+    private String gender;
+
+
     @SerializedName("bmdc")
     @Expose
     private String bmdc;
-    @SerializedName("designation")
-    @Expose
-    private String currentDesignation;
-    @SerializedName("bio")
-    @Expose
-    private String bio;
-    @SerializedName("qualifications")
-    @Expose
-    private String qualifications;
-    @SerializedName("speciality")
-    @Expose
-    private String speciality;
+
     @SerializedName("phone")
     @Expose
     private String phone;
-    @SerializedName("fee")
-    @Expose
-    private String fee;
-    @SerializedName("serverMsg")
-    @Expose
-    private String serverMsg;
-    @SerializedName("image_url")
-    @Expose
-    private String imageUrl;
-    @SerializedName("rating")
-    @Expose
-    private String rating;
     @SerializedName("password")
     @Expose
     private String password;
+    @Expose
+    private String bio;
+    @Expose
+    private String fee;
+    @Expose
+    private String speciality;
+
+    @Expose
+    private String token;
+
+    @SerializedName("image_url")
+    @Expose
+    private String imageUrl;
+
+    @Expose
+    private String serverMsg;
+
+
+
+
+
+    @SerializedName("rating")
+    @Expose
+    private String rating;
+
+
+
 
     public DoctorDataModel(String bmdc, String password) {
         this.bmdc = bmdc;
@@ -53,7 +76,7 @@ public class DoctorDataModel implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return firstName+lastName;
     }
 
     public String getBmdc() {
@@ -61,7 +84,7 @@ public class DoctorDataModel implements Serializable {
     }
 
     public String getCurrentDesignation() {
-        return currentDesignation;
+        return designation;
     }
 
     public String getBio() {
