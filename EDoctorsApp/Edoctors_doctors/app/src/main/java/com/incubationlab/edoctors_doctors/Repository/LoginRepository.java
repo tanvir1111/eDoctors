@@ -51,7 +51,7 @@ public class LoginRepository {
                     requestInterface.onSuccess(response.code(), response.body().getServerMsg());
                 }
                 else {
-                    requestInterface.onFailure(response.body().getServerMsg());
+                    requestInterface.onFailure("Something went wrong!");
                 }
 
             }

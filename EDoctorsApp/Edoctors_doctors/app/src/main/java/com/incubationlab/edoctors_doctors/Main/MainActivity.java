@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView drawerBtn;
     private DrawerLayout mDrawerLayout;
     private ImageView profileIcon;
+    private NavController navController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,21 +32,29 @@ public class MainActivity extends AppCompatActivity {
 
         drawerBtn = findViewById(R.id.drawer_btn);
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        profileIcon= findViewById(R.id.profile_icon);
-        Picasso.get().load(BASE_URL +"/"+LoggedInDoctorData.getValue().getImageUrl()).placeholder(R.drawable.account).into(profileIcon);
+        profileIcon = findViewById(R.id.profile_icon);
+        Picasso.get().load(BASE_URL + "/" + LoggedInDoctorData.getValue().getImageUrl()).placeholder(R.drawable.account).into(profileIcon);
 
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment_main);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment_main);
         NavigationUI.setupWithNavController(navigationView, navController);
 
         drawerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+                if (!mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
                     mDrawerLayout.open();
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (navController.getCurrentDestination().getId() == R.id.navigation_home)
+            super.onBackPressed();
+        else
+            navController.navigateUp();
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 09, 2021 at 02:31 PM
+-- Generation Time: Dec 31, 2021 at 11:19 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -49,6 +49,32 @@ INSERT INTO `appointments` (`patient_id`, `doctor_id`, `payment_status`, `link`,
 ('+8801708924486', '12345', 0, '+8801708924486123451638793631936', 12, '2021-11-6', 0),
 ('+8801708924486', '1234567', 0, '+880170892448612345671638799323342', 1, '2021-11-6', 0),
 ('+8801708924486', '12456', 0, '+8801708924486124561631857824852', 1, '2021-8-17', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `doctor_id` varchar(15) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(2048) NOT NULL,
+  `image_url` varchar(1024) NOT NULL,
+  `date` varchar(15) NOT NULL,
+  `ts` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`doctor_id`, `title`, `description`, `image_url`, `date`, `ts`) VALUES
+('1234567', 'ece cricket team 2', 'post 2', 'images/blogs/1234567ece cricket team 2.jpeg', '12/28/2021', '2021-12-29'),
+('1234567', 'ece cricket team 2ddddghddh', 'post 2', 'images/blogs/1234567ece cricket team 2ddddghddh.jpeg', '12/30/2021', '2021-12-30'),
+('1234567', 'ece cricket team 2dddjggjf', 'post 2bdhfjffjfj', 'images/blogs/1234567ece cricket team 2dddjggjf.jpeg', '12/30/2021', '2021-12-30'),
+('1234567', 'ece cricket team 2gcgchchvyv', 'post 2', 'images/blogs/1234567ece cricket team 2gcgchchvyv.jpeg', '12/30/2021', '2021-12-30'),
+('1234567', 'yxyguvu', 'cyvuuc jvvviuvuvivuvuvuv\nafmkmksamfkam\nasj nfs', 'images/blogs/1234567yxyguvu.jpeg', '12/29/2021', '2021-12-29');
 
 -- --------------------------------------------------------
 
@@ -159,6 +185,12 @@ ALTER TABLE `appointments`
   ADD KEY `appointments_ibfk_2` (`doctor_id`);
 
 --
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`doctor_id`,`title`);
+
+--
 -- Indexes for table `current_serial`
 --
 ALTER TABLE `current_serial`
@@ -192,6 +224,12 @@ ALTER TABLE `users`
 ALTER TABLE `appointments`
   ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `users` (`phone`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`bmdc`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD CONSTRAINT `blogs_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`bmdc`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `current_serial`
