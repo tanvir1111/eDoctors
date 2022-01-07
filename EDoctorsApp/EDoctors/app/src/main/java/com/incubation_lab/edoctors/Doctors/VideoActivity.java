@@ -56,7 +56,6 @@ public class VideoActivity extends AppCompatActivity {
             JitsiMeetConferenceOptions defaultOptions =
                     new JitsiMeetConferenceOptions.Builder()
                             .setServerURL(serverURL)
-                            .setWelcomePageEnabled(false)
                             .build();
             JitsiMeet.setDefaultConferenceOptions(defaultOptions);
         } catch (MalformedURLException e) {
@@ -83,7 +82,6 @@ public class VideoActivity extends AppCompatActivity {
                         .setFeatureFlag("lobby-mode.enabled",false)
                         .setAudioMuted(true)
                         .setVideoMuted(true)
-                        .setWelcomePageEnabled(false)
                         .build();
                 Toast.makeText(getApplicationContext(), StaticDoctorData.loggedInDoctorData.getValue().getBmdc() +appointmentDataModel.getSerial(), Toast.LENGTH_SHORT).show();
                 LiveData<String> msg =appointmentsViewModel.updateCurrentSerial(new AppointmentDataModel(appointmentDataModel.getDoctorId(),appointmentDataModel.getSerial()));

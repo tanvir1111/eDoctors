@@ -211,7 +211,6 @@ public class AppointmentDetailsFragment extends Fragment {
             JitsiMeetConferenceOptions defaultOptions =
                     new JitsiMeetConferenceOptions.Builder()
                             .setServerURL(serverURL)
-                            .setWelcomePageEnabled(false)
                             .build();
             JitsiMeet.setDefaultConferenceOptions(defaultOptions);
         } catch (MalformedURLException e) {
@@ -231,7 +230,6 @@ public class AppointmentDetailsFragment extends Fragment {
                 .setFeatureFlag("help.enabled",false)
                 .setAudioMuted(true)
                 .setVideoMuted(true)
-                .setWelcomePageEnabled(false)
                 .build();
 
         JitsiMeetActivity.launch(getContext(), options);

@@ -2,6 +2,8 @@ package com.incubation_lab.edoctors;
 
 import androidx.lifecycle.MutableLiveData;
 
+import com.incubation_lab.edoctors.Models.UserDataModel;
+
 public class StaticData {
     public static final String BUNDLE_KEY="key";
     public static final String DOCTOR_BUNDLE_KEY = "selected_doctor";
@@ -15,6 +17,7 @@ public class StaticData {
     public static final String USER_NOT_FOUND="user not found";
     public static final String RESPONSE_SUCCESS="success";
     public static final String PICTURE_UPDATE_SUCCESS="picture updated";
+    public static MutableLiveData<UserDataModel> LoggedInUserData =new MutableLiveData<>();
 
     public static MutableLiveData<Integer> LoginCurrentFragment=new MutableLiveData<>();
 

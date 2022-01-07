@@ -12,8 +12,6 @@ import com.incubation_lab.edoctors.Models.UserImageModel;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInstance;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInterface;
 
-import java.util.logging.Handler;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,12 +21,12 @@ import static com.incubation_lab.edoctors.StaticData.PICTURE_UPDATE_SUCCESS;
 import static com.incubation_lab.edoctors.StaticData.RESPONSE_SUCCESS;
 import static com.incubation_lab.edoctors.StaticData.STATUS_LOGGED_IN;
 import static com.incubation_lab.edoctors.StaticData.STATUS_REGISTERED;
+import static com.incubation_lab.edoctors.StaticData.LoggedInUserData;
 
 public class UserRepository {
     public static String LOGIN_SHARED_PREFS="user_token";
     public static String ACCESS_TOKEN="access_token";
     private MutableLiveData<String> loginStatus;
-    private static MutableLiveData<UserDataModel> loggedInUser=new MutableLiveData<>();
     private RetroInterface retroInterface;
     private Application application;
 
@@ -82,7 +80,7 @@ public class UserRepository {
 
                         loginPrefsEditor.putString(ACCESS_TOKEN,response.body().getToken());
                         loginPrefsEditor.apply();
-                        loggedInUser.setValue(response.body());
+                        LoggedInUserData.setValue(response.body());
                         Toast.makeText(application, response.body().getFirstName(), Toast.LENGTH_SHORT).show();
                         loginStatus.setValue(STATUS_LOGGED_IN);
                         loginStatus.setValue("");
@@ -109,7 +107,7 @@ public class UserRepository {
         return loginStatus;
     }
     public LiveData<UserDataModel> getLoggedInUser() {
-        return loggedInUser;
+        return LoggedInUserData;
     }
 
     public void validateToken(String token) {
@@ -120,7 +118,7 @@ public class UserRepository {
                 if (response.isSuccessful()) {
 
                     if(response.body().getServerMsg().equals(RESPONSE_SUCCESS)) {
-                        loggedInUser.setValue(response.body());
+                        LoggedInUserData.setValue(response.body());
                         loginStatus.setValue(STATUS_LOGGED_IN);
                         loginStatus.setValue("");
                         Toast.makeText(application,"welcome "+ response.body().getFirstName(), Toast.LENGTH_SHORT).show();
