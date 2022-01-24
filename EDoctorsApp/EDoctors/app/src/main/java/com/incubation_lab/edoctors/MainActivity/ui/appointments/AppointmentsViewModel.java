@@ -11,6 +11,7 @@ import com.incubation_lab.edoctors.Models.AppointmentDataModel;
 import com.incubation_lab.edoctors.Models.PrescriptionDataModel;
 import com.incubation_lab.edoctors.Repository.AppointmentsRepository;
 import com.incubation_lab.edoctors.Repository.Remote.PrescriptionGetterInterface;
+import com.incubation_lab.edoctors.Repository.Remote.RemoteRequestInterface;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -43,5 +44,9 @@ public class AppointmentsViewModel extends AndroidViewModel {
     }
     public void getPrescription(String appointment_id, PrescriptionGetterInterface prescriptionGetterInterface){
          appointmentsRepository.getPatientPrescription(appointment_id,prescriptionGetterInterface);
+    }
+
+    public void addReview(AppointmentDataModel appointmentDataModel, RemoteRequestInterface requestInterface) {
+        appointmentsRepository.addReview(appointmentDataModel,requestInterface);
     }
 }

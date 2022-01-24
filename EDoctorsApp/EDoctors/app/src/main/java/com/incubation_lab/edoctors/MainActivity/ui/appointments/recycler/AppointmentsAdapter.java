@@ -1,8 +1,10 @@
 package com.incubation_lab.edoctors.MainActivity.ui.appointments.recycler;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +48,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsViewHo
 
         holder.tvSerial.setText(appointmentDataModel.getSerial());
         holder.tvDate.setText(appointmentDataModel.getDate());
-        if(mode.equals("patient")){
+
             holder.tvQualification.setText(appointmentDataModel.getDoctorDataModel().getQualifications());
             holder.tvDesignation.setText(appointmentDataModel.getDoctorDataModel().getCurrentDesignation());
             holder.tvDoctorName.setText(appointmentDataModel.getDoctorDataModel().getName());
@@ -54,18 +56,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsViewHo
                 holder.image.setImageResource(R.drawable.account);
             }
             else
-                Picasso.get().load(BASE_URL +"/"+appointmentDataModel.getDoctorDataModel().getImageUrl()).into(holder.image);
-        }
-        else {
-            holder.tvQualification.setText(appointmentDataModel.getPatientData().getEmail());
-            holder.tvDesignation.setText(appointmentDataModel.getPatientData().getAge());
-            holder.tvDoctorName.setText(appointmentDataModel.getPatientData().getFirstName()+" " +appointmentDataModel.getPatientData().getLastName());
-            if(appointmentDataModel.getPatientData().getImageUrl().toLowerCase().equals("not set")){
-                holder.image.setImageResource(R.drawable.account);
-            }
-            else
-                Picasso.get().load(BASE_URL +"/"+appointmentDataModel.getPatientData().getImageUrl()).into(holder.image);
-        }
+                Picasso.get().load(appointmentDataModel.getDoctorDataModel().getImageUrl()).placeholder(R.drawable.account).into(holder.image);
 
 
         holder.viewDetailsBtn.setOnClickListener(new View.OnClickListener() {

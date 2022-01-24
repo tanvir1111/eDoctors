@@ -14,6 +14,15 @@
             android:id="@+id/action_navigation_home_to_navigation_profile"
             app:destination="@id/navigation_profile"
             app:popUpTo="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_blog_detail"
+            app:destination="@id/navigation_blog_detail" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_doctors"
+            app:destination="@id/navigation_doctors" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_doctor_profile"
+            app:destination="@id/navigation_doctor_profile" />
     </fragment>
 
     <fragment
@@ -24,6 +33,9 @@
         <action
             android:id="@+id/action_navigation_health_blogs_to_navigation_profile"
             app:destination="@id/navigation_profile" />
+        <action
+            android:id="@+id/action_navigation_health_blogs_to_navigation_blog_detail"
+            app:destination="@id/navigation_blog_detail" />
     </fragment>
 
     <fragment
@@ -75,4 +87,9 @@
         android:name="com.incubation_lab.edoctors.MainActivity.ui.appointments.AppointmentDetailsFragment"
 
         tools:layout="@layout/fragment_appointment_details" />
+    <fragment
+        android:id="@+id/navigation_blog_detail"
+        android:name="com.incubation_lab.edoctors.MainActivity.ui.health_blogs.BlogDetailsFragment"
+
+        tools:layout="@layout/fragment_blog_details" />
 </navigation>

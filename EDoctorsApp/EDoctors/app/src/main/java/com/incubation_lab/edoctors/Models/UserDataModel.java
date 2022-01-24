@@ -1,5 +1,7 @@
 package com.incubation_lab.edoctors.Models;
 
+import static com.incubation_lab.edoctors.Repository.Remote.RetroInstance.BASE_URL;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -95,6 +97,6 @@ public class UserDataModel implements Serializable {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return BASE_URL +"/"+imageUrl;
     }
 }

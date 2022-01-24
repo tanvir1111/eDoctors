@@ -41,11 +41,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="32dp"
                 android:text="Md.Tanvir Ahmmad"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/red_primary"
-                app:layout_constraintEnd_toStartOf="@+id/doctor_profile_ratingBar"
+                app:layout_constraintEnd_toStartOf="@+id/doctor_profile_fee"
                 app:layout_constraintStart_toEndOf="@+id/doctor_profile_image"
                 app:layout_constraintTop_toBottomOf="@id/appbarIncluded" />
 
@@ -55,9 +55,8 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
                 android:text="Medical Officer"
-                app:layout_constraintEnd_toStartOf="@+id/doctor_profile_ratingBar"
+                app:layout_constraintEnd_toEndOf="@+id/doctor_profile_name"
                 app:layout_constraintStart_toStartOf="@+id/doctor_profile_name"
                 app:layout_constraintTop_toBottomOf="@+id/doctor_profile_name" />
 
@@ -67,40 +66,52 @@
                 android:layout_height="wrap_content"
 
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="8dp"
                 android:text="MBBS,FCPS (Dhaka Medical College)"
-                app:layout_constraintEnd_toStartOf="@+id/doctor_profile_ratingBar"
+                app:layout_constraintEnd_toEndOf="@+id/doctor_profile_designation"
                 app:layout_constraintStart_toStartOf="@+id/doctor_profile_designation"
                 app:layout_constraintTop_toBottomOf="@+id/doctor_profile_designation" />
 
+
+            <TextView
+                android:id="@+id/tv_doc_profile_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="7dp"
+                android:text="4.5"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/doctor_profile_degree"
+                app:layout_constraintEnd_toStartOf="@+id/doctor_profile_ratingBar"
+                app:layout_constraintStart_toStartOf="@+id/doctor_profile_fee"
+                app:layout_constraintTop_toBottomOf="@+id/doctor_profile_fee" />
 
             <RatingBar
                 android:id="@+id/doctor_profile_ratingBar"
                 style="?attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:isIndicator="true"
-                android:numStars="5"
+                android:numStars="1"
                 android:rating="3.5"
-                android:stepSize=".01"
 
-                app:layout_constraintBottom_toBottomOf="@+id/doctor_profile_degree"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/doctor_profile_fee" />
+                android:stepSize=".01"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_doc_profile_rating"
+                app:layout_constraintEnd_toEndOf="@+id/doctor_profile_fee"
+                app:layout_constraintStart_toEndOf="@+id/tv_doc_profile_rating"
+                app:layout_constraintTop_toTopOf="@+id/tv_doc_profile_rating" />
 
             <TextView
                 android:id="@+id/doctor_profile_fee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="32dp"
                 android:text="500 BDT"
-                app:layout_constraintBottom_toTopOf="@+id/doctor_profile_ratingBar"
-                app:layout_constraintEnd_toEndOf="@+id/doctor_profile_ratingBar"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/doctor_profile_ratingBar"
-                app:layout_constraintTop_toTopOf="@+id/doctor_profile_name" />
+                app:layout_constraintBottom_toBottomOf="@+id/doctor_profile_degree"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/doctor_profile_name"
+                app:layout_constraintVertical_bias="0.100000024" />
 
             <TextView
                 android:id="@+id/aboutLabel"

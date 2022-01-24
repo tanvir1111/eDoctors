@@ -9,7 +9,9 @@ import androidx.lifecycle.LiveData;
 import com.incubation_lab.edoctors.Models.AppointmentDataModel;
 import com.incubation_lab.edoctors.Models.DoctorDataModel;
 
+import com.incubation_lab.edoctors.Models.ReviewDataModel;
 import com.incubation_lab.edoctors.Repository.DoctorsRepository;
+import com.incubation_lab.edoctors.Repository.Remote.OnReviewReceivedInterface;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,4 +33,9 @@ public class DoctorsViewModel extends AndroidViewModel {
     public void getAppointment(AppointmentDataModel appointmentDataModel) {
         doctorsRepository.getAppointment(appointmentDataModel);
     }
+    public void getReviews(String doctorId, OnReviewReceivedInterface onReviewReceivedInterface){
+         doctorsRepository.getReviews(doctorId,onReviewReceivedInterface);
+    }
+
+
 }

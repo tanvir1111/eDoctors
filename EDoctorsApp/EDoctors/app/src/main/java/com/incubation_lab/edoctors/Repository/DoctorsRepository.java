@@ -1,6 +1,7 @@
 package com.incubation_lab.edoctors.Repository;
 
 import android.app.Application;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
@@ -8,6 +9,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.incubation_lab.edoctors.Models.AppointmentDataModel;
 import com.incubation_lab.edoctors.Models.DoctorDataModel;
+import com.incubation_lab.edoctors.Models.ReviewDataModel;
+import com.incubation_lab.edoctors.Repository.Remote.OnReviewReceivedInterface;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInstance;
 import com.incubation_lab.edoctors.Repository.Remote.RetroInterface;
 
@@ -22,7 +25,7 @@ public class DoctorsRepository {
     private RetroInterface retroInterface;
 
 
-    public static MutableLiveData<ArrayList<DoctorDataModel>> allDoctors =new MutableLiveData<>();
+    private static MutableLiveData<ArrayList<DoctorDataModel>> allDoctors =new MutableLiveData<>();
 
 
     public DoctorsRepository(Application application) {
@@ -67,6 +70,29 @@ public class DoctorsRepository {
             @Override
             public void onFailure(Call<AppointmentDataModel> call, Throwable t) {
                 Toast.makeText(application, "Something Went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    public void getReviews(String doctorId, OnReviewReceivedInterface onReviewReceivedInterface) {
+        retroInterface.getReviews(doctorId).enqueue(new Callback<ArrayList<ReviewDataModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ReviewDataModel>> call, Response<ArrayList<ReviewDataModel>> response) {
+                if(response.isSuccessful()){
+                    Log.d("reviews"," " +response.body().get(0).getRating());
+                    if(response.code()==200){
+                        onReviewReceivedInterface.onReceived(response.body());
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ReviewDataModel>> call, Throwable t) {
+                onReviewReceivedInterface.onFailed();
 
             }
         });

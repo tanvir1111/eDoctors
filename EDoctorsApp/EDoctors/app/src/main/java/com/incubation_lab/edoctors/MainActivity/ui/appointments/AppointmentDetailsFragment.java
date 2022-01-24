@@ -10,23 +10,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.incubation_lab.edoctors.MainActivity.ui.appointments.recycler.PrescriptionAdapter;
 import com.incubation_lab.edoctors.Models.AppointmentDataModel;
 import com.incubation_lab.edoctors.Models.PrescriptionDataModel;
 import com.incubation_lab.edoctors.R;
 import com.incubation_lab.edoctors.Repository.Remote.PrescriptionGetterInterface;
+import com.incubation_lab.edoctors.Repository.Remote.RemoteRequestInterface;
 import com.squareup.picasso.Picasso;
 
 import org.jitsi.meet.sdk.JitsiMeet;
@@ -41,7 +46,7 @@ public class AppointmentDetailsFragment extends Fragment {
     private ProgressBar liveProgressBar;
     private ObjectAnimator progressAnimator;
     private int animCycleCount=0;
-    private Button joinBtn;
+    private Button joinBtn,addReviewBtn;
     private String roomId;
     private RecyclerView rvPrescription;
     private TextView doctorName,doctorDesignation,doctorQualifications, tvCurrentSerial,tvUserSerial;
@@ -63,6 +68,7 @@ public class AppointmentDetailsFragment extends Fragment {
         prescriptionAdapter = new PrescriptionAdapter();
 
         joinBtn = root.findViewById(R.id.joinBtn);
+        addReviewBtn = root.findViewById(R.id.btn_add_review);
         doctorName = root.findViewById(R.id.tv_chamber_doctor_name);
         doctorDesignation = root.findViewById(R.id.tv_chamber_doctor_designation);
         doctorQualifications = root.findViewById(R.id.tv_chamber_doctor_qualification);
@@ -104,6 +110,50 @@ public class AppointmentDetailsFragment extends Fragment {
 
             }
         },10);
+        addReviewBtn.setVisibility(appointmentDataModel.getReview().equals("not reviewed")?View.VISIBLE:View.GONE);
+
+        addReviewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                LayoutInflater inflater = LayoutInflater.from(getContext());
+                View reviewAlert = inflater.inflate(R.layout.add_rating_alert, null);
+                EditText etReview = reviewAlert.findViewById(R.id.et_review);
+                RatingBar ratingBar = reviewAlert.findViewById(R.id.review_ratingBar);
+                Button submitBtn = reviewAlert.findViewById(R.id.review_alert_submit_btn);
+
+                builder.setView(reviewAlert);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                submitBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(etReview.getText().toString().isEmpty()){
+                            etReview.setError("write a review");
+                            return;
+                        }
+                        appointmentDataModel.setReview(etReview.getText().toString());
+                        appointmentDataModel.setRating(String.valueOf(ratingBar.getRating()));
+                        appointmentsViewModel.addReview(appointmentDataModel, new RemoteRequestInterface() {
+                            @Override
+                            public void onSuccess(int code, String msg) {
+                                Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                            }
+
+                            @Override
+                            public void onFailure(String msg) {
+                                Toast.makeText(getContext(), "Something Went wrong", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                    }
+                });
+
+            }
+        });
 
 
 

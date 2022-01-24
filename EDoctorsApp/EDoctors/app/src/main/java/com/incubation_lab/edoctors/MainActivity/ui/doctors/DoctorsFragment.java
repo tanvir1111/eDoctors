@@ -12,9 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +32,8 @@ public class DoctorsFragment extends Fragment implements View.OnClickListener{
     private TextView selectedDept;
     private CardView coronaCard,neurologyCard,liverCard,dentistCard,eyeCard,cardioCard,gastroCard,physioCard,othersCard,respiratoryCard;
     private ImageView selected_deptImage;
+    private EditText etDocName;
+    private DoctorsAdapter doctorsAdapter;
 
     public static DoctorsFragment newInstance() {
         return new DoctorsFragment();
@@ -37,10 +42,13 @@ public class DoctorsFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+
         View root = inflater.inflate(R.layout.fragment_doctors, container, false);
         doctorRecyclerView = root.findViewById(R.id.doctor_recycler);
 
         doctorRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
+        doctorsAdapter = new DoctorsAdapter();
 
         selectedDept=root.findViewById(R.id.choose_department_Textview);
         motionLayout=root.findViewById(R.id.doctors_motion_layout);
@@ -55,6 +63,17 @@ public class DoctorsFragment extends Fragment implements View.OnClickListener{
         othersCard=root.findViewById(R.id.category_others);
         respiratoryCard=root.findViewById(R.id.category_respiratory);
         selected_deptImage=root.findViewById(R.id.selected_dept_image);
+        etDocName = root.findViewById(R.id.search_doctor_name);
+
+
+        if(getArguments()!=null){
+            String catName = getArguments().getString("category");
+            int imgId = getArguments().getInt("imageId");
+
+            selectedDept.setText(catName);
+            selected_deptImage.setImageResource(imgId);
+
+        }
 
 
         coronaCard.setOnClickListener(this);
@@ -67,10 +86,31 @@ public class DoctorsFragment extends Fragment implements View.OnClickListener{
         physioCard.setOnClickListener(this);
         othersCard.setOnClickListener(this);
         respiratoryCard.setOnClickListener(this);
-
+        doctorRecyclerView.setAdapter(doctorsAdapter);
         mViewModel= new ViewModelProvider(this).get(DoctorsViewModel.class);
         mViewModel.getAllDoctors().observe(getViewLifecycleOwner(),doctorDataModels -> {
-            doctorRecyclerView.setAdapter(new DoctorsAdapter(getContext(),doctorDataModels));
+           doctorsAdapter.setAllDoctors(doctorDataModels);
+           if(getArguments()!=null)
+            doctorsAdapter.filter(getArguments().getString("category"),"");
+
+        });
+
+        etDocName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                doctorsAdapter.filter(selectedDept.getText().toString(),etDocName.getText().toString());
+
+            }
         });
 
 
@@ -131,5 +171,8 @@ public class DoctorsFragment extends Fragment implements View.OnClickListener{
             motionLayout.transitionToStart();
             selected_deptImage.setImageResource(R.drawable.icons_lungs);
         }
+
+
+        doctorsAdapter.filter(selectedDept.getText().toString(),etDocName.getText().toString());
     }
 }

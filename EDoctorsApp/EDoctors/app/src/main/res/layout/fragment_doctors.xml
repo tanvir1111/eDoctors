@@ -56,10 +56,11 @@
         app:layout_constraintTop_toBottomOf="@+id/appbarIncluded" />
 
     <EditText
-        android:id="@+id/doctor_name_editText"
+        android:id="@+id/search_doctor_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
         android:hint="Enter doctor name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +76,7 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doctor_name_editText"
+        app:layout_constraintTop_toBottomOf="@+id/search_doctor_name"
         app:layout_constraintVertical_bias="0.0" />
 
 

@@ -7,6 +7,7 @@ const {
   register,
   resetPassword,
   updatePicture,
+  getAllReviews,
 } = require("./doctor.service");
 const { sign, verify } = require("jsonwebtoken");
 const fs = require("fs");
@@ -173,6 +174,12 @@ module.exports = {
           serverMsg: "picture updated",
         });
       });
+    });
+  },
+  getAllReviews: (req, res) => {
+    getAllReviews(req.params.doctor_id, (err, results) => {
+      if (err) return res.status(500);
+      return res.status(200).json(results);
     });
   },
 };

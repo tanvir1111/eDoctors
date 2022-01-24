@@ -36,6 +36,14 @@ public class AppointmentDataModel implements Serializable {
     DoctorDataModel doctorDataModel;
 
     @Expose
+    @SerializedName("rating")
+    String rating;
+
+    @Expose
+    @SerializedName("review")
+    String review;
+
+    @Expose
     String serverMsg;
 
     public AppointmentDataModel(String patientId, String doctorId, String date) {
@@ -79,4 +87,19 @@ public class AppointmentDataModel implements Serializable {
         return doctorDataModel;
     }
 
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public String getReview() {
+        return review;
+    }
 }
