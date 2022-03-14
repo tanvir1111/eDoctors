@@ -81,7 +81,6 @@ public class DoctorsRepository {
             @Override
             public void onResponse(Call<ArrayList<ReviewDataModel>> call, Response<ArrayList<ReviewDataModel>> response) {
                 if(response.isSuccessful()){
-                    Log.d("reviews"," " +response.body().get(0).getRating());
                     if(response.code()==200){
                         onReviewReceivedInterface.onReceived(response.body());
                     }

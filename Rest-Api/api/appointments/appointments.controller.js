@@ -5,17 +5,28 @@ const {
   updateCurrentSerial,
   getCurrentSerial,
   addReview,
+  getAppointmentOffline,
 } = require("./appointments.service");
 
 module.exports = {
   getAppointment: (req, res) => {
-    getAppointment(req.body, (err) => {
-      if (err) {
-        return res.json({ serverMsg: err.message });
-      }
+    if (req.body.type == "online") {
+      getAppointment(req.body, (err) => {
+        if (err) {
+          return res.json({ serverMsg: err.message });
+        }
 
-      return res.status(200).json({ serverMsg: "success" });
-    });
+        return res.status(200).json({ serverMsg: "success" });
+      });
+    } else {
+      getAppointmentOffline(req.body, (err) => {
+        if (err) {
+          return res.json({ serverMsg: err.message });
+        }
+
+        return res.status(200).json({ serverMsg: "success" });
+      });
+    }
   },
   getDoctorAppointmentList: (req, res) => {
     getDoctorAppointmentList(req.params.doctor_id, (err, results) => {

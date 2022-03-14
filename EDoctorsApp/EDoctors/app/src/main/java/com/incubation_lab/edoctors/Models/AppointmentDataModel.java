@@ -44,12 +44,22 @@ public class AppointmentDataModel implements Serializable {
     String review;
 
     @Expose
+    @SerializedName("type")
+    String type;
+
+    @Expose
+    @SerializedName("symptomMsg")
+    String symptom;
+
+    @Expose
     String serverMsg;
 
-    public AppointmentDataModel(String patientId, String doctorId, String date) {
+    public AppointmentDataModel(String patientId, String doctorId, String date,String symptom,String type) {
         this.patientId = patientId;
         this.doctorId = doctorId;
         this.date = date;
+        this.symptom = symptom;
+        this.type = type;
     }
     public AppointmentDataModel(String doctorId,String serial){
         this.doctorId = doctorId;
@@ -101,5 +111,13 @@ public class AppointmentDataModel implements Serializable {
 
     public String getReview() {
         return review;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getSymptom() {
+        return symptom;
     }
 }

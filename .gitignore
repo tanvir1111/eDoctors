@@ -153,3 +153,4 @@ EDoctorsApp/Edoctors_doctors/app/build/intermediates
 EDoctorsApp/Edoctors_doctors/app/build/generated
 
 *.apk
+EDoctorsApp/EDoctors/app/src/main/java/com/incubation_lab/edoctors/Repository/Remote/RetroInstance.java

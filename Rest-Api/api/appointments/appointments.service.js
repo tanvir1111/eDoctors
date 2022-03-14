@@ -15,8 +15,8 @@ let today = new Date().toISOString().slice(0, 10);
 module.exports = {
   getAppointment: (data, callback) => {
     pool.query(
-      `select max(serial) as max from appointments where doctor_id=?`,
-      [data.doctor_id],
+      `select max(serial) as max from appointments where doctor_id=? and date = ?`,
+      [data.doctor_id, data.date],
       (err, serialResult) => {
         if (err) {
           return callback(err);
@@ -33,6 +33,33 @@ module.exports = {
         pool.query(
           `Insert into appointments(doctor_id,patient_id,link,payment_status,date,serial) values(?,?,?,?,?,?) `,
           [data.doctor_id, data.patient_id, link, 0, data.date, serial + 1],
+          (error, results) => {
+            if (error) {
+              return callback(error);
+            }
+            return callback(null, results);
+          }
+        );
+      }
+    );
+  },
+  getAppointmentOffline: (data, callback) => {
+    console.log(data);
+    pool.query(
+      `select max(serial) as max from appointments_offline where doctor_id=? and date = ?`,
+      [data.doctor_id, data.date],
+      (err, serialResult) => {
+        if (err) {
+          return callback(err);
+        }
+        var serial = JSON.parse(JSON.stringify(serialResult))[0].max;
+        console.log(serial);
+        if (serial == null) {
+          serial = 0;
+        }
+        pool.query(
+          `Insert into appointments_offline(doctor_id,patient_id,date,serial) values(?,?,?,?) `,
+          [data.doctor_id, data.patient_id, data.date, serial + 1],
           (error, results) => {
             if (error) {
               return callback(error);

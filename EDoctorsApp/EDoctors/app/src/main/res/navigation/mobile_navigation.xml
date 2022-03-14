@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_navigation_home_to_navigation_doctor_profile"
             app:destination="@id/navigation_doctor_profile" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_health_blogs"
+            app:destination="@id/navigation_health_blogs" />
     </fragment>
 
     <fragment

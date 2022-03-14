@@ -39,7 +39,7 @@ import java.util.Date;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private TextView greetText,tvAppointmentNotice;
+    private TextView greetText,tvAppointmentNotice,tvTopDoctorsViewAll,tvTopBlogsViewAll;
     private DoctorsViewModel doctorsViewModel;
 
     private RecyclerView rvCategories,rvDoctors,rvBlogs;
@@ -62,6 +62,8 @@ public class HomeFragment extends Fragment {
         rvDoctors = root.findViewById(R.id.rv_top_doctors);
         rvBlogs = root.findViewById(R.id.rv_top_blogs);
         tvAppointmentNotice = root.findViewById(R.id.appointment_notice);
+        tvTopDoctorsViewAll = root.findViewById(R.id.top_doctors_view_all);
+        tvTopBlogsViewAll = root.findViewById(R.id.top_blogs_view_all);
         categoriesAdapter = new CategoriesAdapter(new CategoryClickListener() {
             @Override
             public void onclick(CategoryDataModel categoryData) {
@@ -134,6 +136,21 @@ public class HomeFragment extends Fragment {
             greetText.setText("Good Afternoon\n" + userName);
         else
             greetText.setText("Good Evening\n" + userName);
+
+        tvTopDoctorsViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_navigation_home_to_navigation_doctors);
+
+            }
+        });
+        tvTopBlogsViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(getActivity(),R.id.nav_host_fragment).navigate(R.id.action_navigation_home_to_navigation_health_blogs);
+
+            }
+        });
 
 
 
