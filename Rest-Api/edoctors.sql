@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 31, 2021 at 11:19 PM
+-- Generation Time: Mar 16, 2022 at 03:13 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -34,21 +34,61 @@ CREATE TABLE `appointments` (
   `link` varchar(255) NOT NULL,
   `serial` int(5) NOT NULL,
   `date` varchar(15) NOT NULL,
-  `appointment_status` int(2) NOT NULL DEFAULT 0
+  `appointment_status` int(2) NOT NULL DEFAULT 0,
+  `rating` float NOT NULL DEFAULT -1,
+  `review` varchar(1024) NOT NULL DEFAULT 'not reviewed',
+  `review_date` varchar(30) DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `appointments`
 --
 
-INSERT INTO `appointments` (`patient_id`, `doctor_id`, `payment_status`, `link`, `serial`, `date`, `appointment_status`) VALUES
-('+8801708924486', '12345', 0, '+8801708924486123451631857791493', 10, '2021-8-17', 0),
-('+8801708924486', '12345', 0, '+8801708924486123451631857798720', 2, '2021-8-17', 0),
-('+8801708924486', '12345', 0, '+8801708924486123451631857804715', 3, '2021-8-17', 0),
-('+8801708924486', '12345', 0, '+8801708924486123451638793626190', 11, '2021-11-6', 0),
-('+8801708924486', '12345', 0, '+8801708924486123451638793631936', 12, '2021-11-6', 0),
-('+8801708924486', '1234567', 0, '+880170892448612345671638799323342', 1, '2021-11-6', 0),
-('+8801708924486', '12456', 0, '+8801708924486124561631857824852', 1, '2021-8-17', 0);
+INSERT INTO `appointments` (`patient_id`, `doctor_id`, `payment_status`, `link`, `serial`, `date`, `appointment_status`, `rating`, `review`, `review_date`) VALUES
+('+8801708924486', '12345', 0, '+8801708924486123451631857791493', 10, '2022-01-22', 0, 3.2, 'hhhh', '2022-01-24 13:11:25'),
+('+8801708924486', '12345', 0, '+8801708924486123451631857798720', 2, '2021-8-17', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
+('+8801708924486', '12345', 0, '+8801708924486123451631857804715', 3, '2021-8-17', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
+('+8801708924486', '12345', 0, '+8801708924486123451638793626190', 11, '2021-11-6', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
+('+8801708924486', '12345', 0, '+8801708924486123451638793631936', 12, '2021-11-6', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
+('+8801708924486', '12345', 0, '+8801708924486123451642056071214', 14, '2022-01-13', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
+('+8801708924486', '12345', 0, '+8801708924486123451642056364086', 15, '2022-0-13', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
+('+8801708924486', '12345', 0, '+8801708924486123451647006718122', 1, '2022-03-11', 0, -1, 'not reviewed', '2022-03-11 19:51:58'),
+('+8801708924486', '12345', 0, '+8801708924486123451647006856456', 2, '2022-03-11', 0, -1, 'not reviewed', '2022-03-11 19:54:16'),
+('+8801708924486', '12345', 0, '+8801708924486123452022-01-13', 13, '2022-0-13', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
+('+8801708924486', '1234567', 0, '+880170892448612345671638799323342', 1, '2022-01-24', 0, 3, 'i really liked his way of treatment ', '2022-01-24'),
+('+8801708924486', '12456', 0, '+8801708924486124561631857824852', 1, '2021-8-17', 0, -1, 'not reviewed', '2022-01-24 13:11:25');
+
+--
+-- Triggers `appointments`
+--
+DELIMITER $$
+CREATE TRIGGER `rating_update` AFTER UPDATE ON `appointments` FOR EACH ROW UPDATE doctors
+    SET rating = (SELECT AVG(rating) FROM appointments WHERE doctors.bmdc = appointments.doctor_id and appointments.rating !=-1) WHERE bmdc = New.doctor_id
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `appointments_offline`
+--
+
+CREATE TABLE `appointments_offline` (
+  `patient_id` varchar(255) NOT NULL,
+  `doctor_id` varchar(255) NOT NULL,
+  `serial` int(5) NOT NULL,
+  `date` varchar(15) NOT NULL,
+  `rating` float NOT NULL DEFAULT -1,
+  `review` varchar(1024) NOT NULL DEFAULT 'not reviewed',
+  `review_date` varchar(30) DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `appointments_offline`
+--
+
+INSERT INTO `appointments_offline` (`patient_id`, `doctor_id`, `serial`, `date`, `rating`, `review`, `review_date`) VALUES
+('+8801708924486', '12345', 1, '2022-03-13', -1, 'not reviewed', '2022-03-12 07:14:55');
 
 -- --------------------------------------------------------
 
@@ -122,9 +162,9 @@ CREATE TABLE `doctors` (
 --
 
 INSERT INTO `doctors` (`first_name`, `last_name`, `bmdc`, `phone`, `speciality`, `designation`, `qualifications`, `bio`, `fee`, `rating`, `image_url`, `password`) VALUES
-('Md.', '', '12345', '+8801708924486', 'Corona Specialist', 'Medical, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '500', 0, 'images/doctors/12345.jpeg', '12345'),
+('Md.', '', '12345', '+8801708924486', 'Corona Specialist', 'Medical, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '500', 3.2, 'images/doctors/12345.jpeg', '12345'),
 ('Tanvir', '', '123456', '01708924486', 'Corona Specialist', 'Medical officer, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '800', 0, 'not set', '12345'),
-('Tanvir', 'Ahmmad', '1234567', '+8801521455494', 'abcd', 'cd', 'qy', 'bio', '500', 0, 'not set', '$2a$10$OzFzN0d9N2h/3BS.w.dnf.sCFEF73umiRLrl5.CzWh4V6XWfBnuFS'),
+('Tanvir', 'Ahmmad', '1234567', '+8801521455494', 'abcd', 'cd', 'qy', 'bio', '500', 3, 'not set', '$2a$10$OzFzN0d9N2h/3BS.w.dnf.sCFEF73umiRLrl5.CzWh4V6XWfBnuFS'),
 ('Ahmmad', '', '12456', '01708924486', 'Corona Specialist', 'Medical officer, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '1000', 0, 'not set', '12345');
 
 -- --------------------------------------------------------
@@ -185,6 +225,12 @@ ALTER TABLE `appointments`
   ADD KEY `appointments_ibfk_2` (`doctor_id`);
 
 --
+-- Indexes for table `appointments_offline`
+--
+ALTER TABLE `appointments_offline`
+  ADD PRIMARY KEY (`patient_id`,`doctor_id`,`date`);
+
+--
 -- Indexes for table `blogs`
 --
 ALTER TABLE `blogs`
@@ -236,6 +282,12 @@ ALTER TABLE `blogs`
 --
 ALTER TABLE `current_serial`
   ADD CONSTRAINT `current_serial_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctors` (`bmdc`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `prescriptions`
+--
+ALTER TABLE `prescriptions`
+  ADD CONSTRAINT `prescriptions_ibfk_1` FOREIGN KEY (`appointment_id`) REFERENCES `appointments` (`link`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
