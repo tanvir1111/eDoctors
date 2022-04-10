@@ -3,12 +3,16 @@ const { genSaltSync, hashSync, compareSync } = require("bcryptjs");
 
 module.exports = {
   getAllDoctors: (callback) => {
-    pool.query(`select * from doctors `, (err, results) => {
-      if (err) {
-        return callback(err);
+    pool.query(
+      `select * from doctors where status =?`,
+      [true],
+      (err, results) => {
+        if (err) {
+          return callback(err);
+        }
+        return callback(null, results);
       }
-      return callback(null, results);
-    });
+    );
   },
   loginDoctor: (data, callback) => {
     pool.query(

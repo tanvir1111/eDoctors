@@ -32,7 +32,7 @@ module.exports = {
         }
         pool.query(
           `Insert into appointments(doctor_id,patient_id,link,payment_status,date,serial) values(?,?,?,?,?,?) `,
-          [data.doctor_id, data.patient_id, link, 0, data.date, serial + 1],
+          [data.doctor_id, data.patient_id, link, 0, today, serial + 1],
           (error, results) => {
             if (error) {
               return callback(error);
@@ -71,6 +71,7 @@ module.exports = {
     );
   },
   getPatientAppointmentList: (patient_id, callback) => {
+    console.log(patient_id, today);
     pool.query(
       `select * from appointments where patient_id = ? and date = ?`,
       [patient_id, today],

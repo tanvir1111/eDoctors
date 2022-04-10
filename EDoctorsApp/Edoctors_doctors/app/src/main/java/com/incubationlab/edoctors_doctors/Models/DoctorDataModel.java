@@ -53,6 +53,12 @@ public class DoctorDataModel {
     @Expose
     private String serverMsg;
 
+    @Expose
+    private boolean status;
+    @SerializedName("max_patients")
+    @Expose
+    private int maxPatients;
+
 
     public DoctorDataModel(String doctorId, String phone, String password) {
         this.doctorId = doctorId;
@@ -136,5 +142,13 @@ public class DoctorDataModel {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public int getMaxPatients() {
+        return maxPatients;
     }
 }

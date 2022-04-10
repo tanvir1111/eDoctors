@@ -47,5 +47,9 @@ public interface RetroInterface {
 
     @POST("/api/blog/updateBlog")
     Call<ResponseModel> updateBlog(@Body BlogDataModel blogDataModel);
+    @POST("/api/settings/setStatus")
+    Call<ResponseModel> setStatus(@Body DoctorDataModel doctorDataModel);
+    @POST("/api/settings/unSetStatus")
+    Call<ResponseModel> unSetStatus(@Body DoctorDataModel doctorDataModel);
     
 }

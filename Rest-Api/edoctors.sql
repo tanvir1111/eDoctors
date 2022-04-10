@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 16, 2022 at 03:13 AM
+-- Generation Time: Apr 10, 2022 at 05:45 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -54,6 +54,7 @@ INSERT INTO `appointments` (`patient_id`, `doctor_id`, `payment_status`, `link`,
 ('+8801708924486', '12345', 0, '+8801708924486123451642056364086', 15, '2022-0-13', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
 ('+8801708924486', '12345', 0, '+8801708924486123451647006718122', 1, '2022-03-11', 0, -1, 'not reviewed', '2022-03-11 19:51:58'),
 ('+8801708924486', '12345', 0, '+8801708924486123451647006856456', 2, '2022-03-11', 0, -1, 'not reviewed', '2022-03-11 19:54:16'),
+('+8801708924486', '12345', 0, '+8801708924486123451649479505514', 1, '2022-04-09', 0, -1, 'not reviewed', '2022-04-09 10:45:05'),
 ('+8801708924486', '12345', 0, '+8801708924486123452022-01-13', 13, '2022-0-13', 0, -1, 'not reviewed', '2022-01-24 13:11:25'),
 ('+8801708924486', '1234567', 0, '+880170892448612345671638799323342', 1, '2022-01-24', 0, 3, 'i really liked his way of treatment ', '2022-01-24'),
 ('+8801708924486', '12456', 0, '+8801708924486124561631857824852', 1, '2021-8-17', 0, -1, 'not reviewed', '2022-01-24 13:11:25');
@@ -132,7 +133,7 @@ CREATE TABLE `current_serial` (
 --
 
 INSERT INTO `current_serial` (`doctor_id`, `serial`) VALUES
-('12345', 8),
+('12345', 0),
 ('1234567', 1),
 ('12456', 0);
 
@@ -154,6 +155,8 @@ CREATE TABLE `doctors` (
   `fee` varchar(5) NOT NULL DEFAULT '0',
   `rating` float NOT NULL DEFAULT 0,
   `image_url` varchar(255) NOT NULL DEFAULT 'not set',
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `max_patients` int(3) NOT NULL DEFAULT 50,
   `password` varchar(1024) NOT NULL DEFAULT '12345'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -161,11 +164,11 @@ CREATE TABLE `doctors` (
 -- Dumping data for table `doctors`
 --
 
-INSERT INTO `doctors` (`first_name`, `last_name`, `bmdc`, `phone`, `speciality`, `designation`, `qualifications`, `bio`, `fee`, `rating`, `image_url`, `password`) VALUES
-('Md.', '', '12345', '+8801708924486', 'Corona Specialist', 'Medical, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '500', 3.2, 'images/doctors/12345.jpeg', '12345'),
-('Tanvir', '', '123456', '01708924486', 'Corona Specialist', 'Medical officer, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '800', 0, 'not set', '12345'),
-('Tanvir', 'Ahmmad', '1234567', '+8801521455494', 'abcd', 'cd', 'qy', 'bio', '500', 3, 'not set', '$2a$10$OzFzN0d9N2h/3BS.w.dnf.sCFEF73umiRLrl5.CzWh4V6XWfBnuFS'),
-('Ahmmad', '', '12456', '01708924486', 'Corona Specialist', 'Medical officer, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '1000', 0, 'not set', '12345');
+INSERT INTO `doctors` (`first_name`, `last_name`, `bmdc`, `phone`, `speciality`, `designation`, `qualifications`, `bio`, `fee`, `rating`, `image_url`, `status`, `max_patients`, `password`) VALUES
+('Md.', '', '12345', '+8801708924486', 'Corona Specialist', 'Medical, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '500', 3.2, 'images/doctors/12345.jpeg', 1, 50, '12345'),
+('Tanvir', '', '123456', '01708924486', 'Corona Specialist', 'Medical officer, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '800', 0, 'not set', 0, 50, '12345'),
+('Tanvir', 'Ahmmad', '1234567', '+8801521455494', 'abcd', 'cd', 'qy', 'bio', '500', 3, 'not set', 1, 50, '$2a$10$OzFzN0d9N2h/3BS.w.dnf.sCFEF73umiRLrl5.CzWh4V6XWfBnuFS'),
+('Ahmmad', '', '12456', '01708924486', 'Corona Specialist', 'Medical officer, Dhaka Medical College', 'MBBS,FCPS(DMC)', 'I am a vla bla bla', '1000', 0, 'not set', 0, 50, '12345');
 
 -- --------------------------------------------------------
 
